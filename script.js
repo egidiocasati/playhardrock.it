@@ -83,20 +83,21 @@ contactForm.addEventListener('submit', async (e) => {
         return;
     }
 
-    // Here you would normally send the data to a server
-    // For now, we'll just show a success message
-    // You can integrate with services like Formspree, EmailJS, or your own backend
-
-    // Simulate form submission
     try {
-        // For GitHub Pages, you can use a service like Formspree
-        // Example: await fetch('https://formspree.io/f/YOUR_FORM_ID', { ... })
+        const response = await fetch('https://formspree.io/f/xjgewwvo', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
 
-        // For now, just simulate success
-        await new Promise(resolve => setTimeout(resolve, 1000));
-
-        showMessage('Grazie per il tuo messaggio! Ti contatteremo al più presto.', 'success');
-        contactForm.reset();
+        if (response.ok) {
+            showMessage('Grazie per il tuo messaggio! Ti contatteremo al più presto.', 'success');
+            contactForm.reset();
+        } else {
+            throw new Error('Form submission failed');
+        }
     } catch (error) {
         showMessage('Si è verificato un errore. Per favore riprova più tardi o contattaci direttamente.', 'error');
     }
