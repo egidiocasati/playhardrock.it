@@ -205,3 +205,161 @@ window.addEventListener('scroll', () => {
 console.log('%c🎸 PLAY HARD 🎸', 'font-size: 20px; font-weight: bold; color: #c41e3a;');
 console.log('%cWhen rock history meets the present', 'font-size: 14px; color: #c0c0c0;');
 console.log('%cWebsite developed with passion for rock and metal', 'font-size: 12px; color: #666;');
+
+// ========================================
+// SOUND WAVES BACKGROUND
+// ========================================
+
+const canvas = document.getElementById('soundWaves');
+if (canvas) {
+    const ctx = canvas.getContext('2d');
+    let animationId;
+    let waves = [];
+    const numWaves = 5;
+
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        initWaves();
+    }
+
+    function initWaves() {
+        waves = [];
+        for (let i = 0; i < numWaves; i++) {
+            waves.push({
+                y: canvas.height * (0.3 + Math.random() * 0.4),
+                amplitude: 20 + Math.random() * 40,
+                frequency: 0.005 + Math.random() * 0.01,
+                speed: 0.04 + Math.random() * 0.05,
+                phase: Math.random() * Math.PI * 2,
+                lineWidth: 0.5 + Math.random() * 1,
+                opacity: 0.1 + Math.random() * 0.3
+            });
+        }
+    }
+
+    function drawWave(wave, time) {
+        ctx.beginPath();
+        ctx.strokeStyle = `rgba(255, 80, 100, ${wave.opacity + 0.2})`;
+        ctx.lineWidth = wave.lineWidth;
+
+        for (let x = 0; x < canvas.width; x++) {
+            const y = wave.y +
+                Math.sin(x * wave.frequency + time * wave.speed + wave.phase) * wave.amplitude +
+                Math.sin(x * wave.frequency * 2.5 + time * wave.speed * 1.5) * (wave.amplitude * 0.3);
+
+            if (x === 0) {
+                ctx.moveTo(x, y);
+            } else {
+                ctx.lineTo(x, y);
+            }
+        }
+        ctx.stroke();
+    }
+
+    function animate(time) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        waves.forEach(wave => {
+            drawWave(wave, time * 0.01);
+        });
+
+        // Add subtle vertical bars (equalizer style)
+        const barCount = 60;
+        const barWidth = canvas.width / barCount;
+
+        for (let i = 0; i < barCount; i++) {
+            const x = i * barWidth;
+            const height = (Math.sin(time * 0.004 + i * 0.3) * 0.5 + 0.5) *
+                          (50 + Math.sin(time * 0.002 + i * 0.5) * 30);
+            const opacity = 0.03 + Math.sin(time * 0.003 + i * 0.2) * 0.02;
+
+            ctx.fillStyle = `rgba(255, 80, 100, ${opacity + 0.05})`;
+            ctx.fillRect(x, canvas.height / 2 - height / 2, barWidth - 2, height);
+        }
+
+        // Random lightning
+        if (Math.random() > 0.995 && lightningFrames <= 0) {
+            createLightning();
+        }
+        drawLightning();
+
+        animationId = requestAnimationFrame(animate);
+    }
+
+    let lightningFrames = 0;
+    let lightningData = null;
+
+    function createLightning() {
+        const centerX = canvas.width / 2;
+        // Posizione casuale attorno al logo
+        const angle = Math.random() * Math.PI * 2;
+        const distance = 180 + Math.random() * 180;
+        const startX = centerX + Math.cos(angle) * distance;
+        const startY = Math.random() * canvas.height * 0.2;
+
+        const points = [{ x: startX, y: startY }];
+        let currentX = startX;
+        let currentY = startY;
+
+        while (currentY < canvas.height * 0.9) {
+            const nextY = currentY + 20 + Math.random() * 35;
+            const nextX = currentX + (Math.random() - 0.5) * 70;
+            points.push({ x: nextX, y: nextY, branch: Math.random() > 0.7 });
+            currentX = nextX;
+            currentY = nextY;
+        }
+
+        lightningData = points;
+        lightningFrames = 60; // Dura 60 frame
+    }
+
+    function drawLightning() {
+        if (!lightningData || lightningFrames <= 0) return;
+
+        const alpha = lightningFrames / 60;
+        ctx.beginPath();
+        ctx.strokeStyle = `rgba(255, 255, 255, ${alpha * 0.95})`;
+        ctx.lineWidth = 3.5;
+        ctx.shadowColor = `rgba(255, 255, 255, ${alpha * 0.9})`;
+        ctx.shadowBlur = 30;
+
+        ctx.moveTo(lightningData[0].x, lightningData[0].y);
+
+        for (let i = 1; i < lightningData.length; i++) {
+            const p = lightningData[i];
+            ctx.lineTo(p.x, p.y);
+
+            if (p.branch) {
+                const branchX = p.x + (Math.random() - 0.5) * 50;
+                const branchY = p.y + 25 + Math.random() * 20;
+                ctx.moveTo(p.x, p.y);
+                ctx.lineTo(branchX, branchY);
+                ctx.moveTo(p.x, p.y);
+            }
+        }
+
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+        lightningFrames--;
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    animate(0);
+
+    // Stop animation when not in view
+    const heroSection = document.getElementById('home');
+    const waveObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                if (!animationId) animate(0);
+            } else {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+            }
+        });
+    }, { threshold: 0.1 });
+
+    waveObserver.observe(heroSection);
+}
