@@ -1409,3 +1409,63 @@ section:nth-child(even) {
         padding: 4rem 0;
     }
 }
+
+/* ========================================
+   COOKIE BANNER
+   ======================================== */
+
+.cookie-banner {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(10, 10, 10, 0.98);
+    border-top: 2px solid var(--primary-color);
+    padding: 1.5rem;
+    z-index: 9999;
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.5);
+}
+
+.cookie-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.cookie-content p {
+    color: var(--gray-text);
+    margin: 0;
+    flex: 1;
+    font-size: 0.95rem;
+}
+
+.cookie-content a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.cookie-content a:hover {
+    text-decoration: underline;
+}
+
+.cookie-content .btn {
+    padding: 0.8rem 2rem;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+@media screen and (max-width: 600px) {
+    .cookie-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .cookie-content .btn {
+        width: 100%;
+    }
+}

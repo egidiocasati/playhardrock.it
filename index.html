@@ -447,6 +447,7 @@
                     <a href="#gallery">Live</a>
                     <a href="#technical">Technical</a>
                     <a href="#contact">Contatti</a>
+                    <a href="cookie-policy.html">Cookie Policy</a>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -456,5 +457,25 @@
     </footer>
 
     <script src="script.js"></script>
+
+    <!-- Cookie Banner -->
+    <div id="cookieBanner" class="cookie-banner">
+        <div class="cookie-content">
+            <p>Questo sito utilizza cookie tecnici e di terze parti per migliorare l'esperienza di navigazione.
+            <a href="cookie-policy.html">Leggi la Cookie Policy</a></p>
+            <button id="acceptCookies" class="btn btn-primary">Accetta</button>
+        </div>
+    </div>
+
+    <script>
+        // Cookie Banner
+        if (!localStorage.getItem('cookiesAccepted')) {
+            document.getElementById('cookieBanner').style.display = 'block';
+        }
+        document.getElementById('acceptCookies').addEventListener('click', function() {
+            localStorage.setItem('cookiesAccepted', 'true');
+            document.getElementById('cookieBanner').style.display = 'none';
+        });
+    </script>
 </body>
 </html>
