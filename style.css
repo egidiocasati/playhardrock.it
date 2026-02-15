@@ -166,9 +166,6 @@ body {
     pointer-events: none;
 }
 
-.hero-content {
-    z-index: 3;
-}
 
 .hero::before {
     content: '';
@@ -199,8 +196,9 @@ body {
 
 .hero-content {
     text-align: center;
-    z-index: 2;
+    z-index: 3;
     animation: fadeInUp 1s ease-out;
+    position: relative;
 }
 
 .hero-logo {
