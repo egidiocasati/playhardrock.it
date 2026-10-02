@@ -1,0 +1,24 @@
+[
+  {
+    "date": "2026-11-14",
+    "time": "22:00",
+    "day": "Sabato",
+    "venue": "The Old Jesse",
+    "city": "Saronno",
+    "address": "Via Maestri del Lavoro 27",
+    "venueUrl": "https://www.facebook.com/THEOLDJESSE",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Via+Maestri+del+Lavoro+27,+Saronno,+Italy,+21047",
+    "venueLogo": "images/old_jesse_logo.jpg"
+  },
+  {
+    "date": "2026-04-11",
+    "time": "22:00",
+    "day": "Sabato",
+    "venue": "The Old Jesse",
+    "city": "Saronno",
+    "address": "Via Maestri del Lavoro 27",
+    "venueUrl": "https://www.facebook.com/THEOLDJESSE",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Via+Maestri+del+Lavoro+27,+Saronno,+Italy,+21047",
+    "venueLogo": "images/old_jesse_logo.jpg"
+  }
+]

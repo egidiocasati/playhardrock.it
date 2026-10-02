@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PlayHard — Hard Rock dal 1979</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* ───────────────────────── CUSTOM PROPERTIES ───────────────────────── */
+    :root {
+      --bg:        #050505;
+      --bg-light:  #0A0A0A;
+      --text:      #E8E4DE;
+      --accent:    #4A7FB5;
+      --ff:        'Space Grotesk', sans-serif;
+    }
+
+    /* ───────────────────────── RESET ───────────────────────── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      font-family: var(--ff);
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* ── Film grain overlay ── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 9998;
+      pointer-events: none;
+      opacity: 0.04;
+      background-image:
+        repeating-conic-gradient(
+          rgba(255,255,255,0.08) 0% 25%,
+          transparent 0% 50%
+        );
+      background-size: 4px 4px;
+      mix-blend-mode: overlay;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: var(--ff); cursor: pointer; }
+    input, textarea { font-family: var(--ff); }
+
+    /* ───────────────────────── SCROLL ANIMATIONS ───────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+
+    /* ───────────────────────── NAVIGATION ───────────────────────── */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem 2.5rem;
+    }
+
+    .nav__logo img {
+      height: 35px;
+      width: auto;
+    }
+
+    .nav__links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav__links a {
+      font-size: 0.65rem;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      color: var(--text);
+      opacity: 0.6;
+      transition: opacity 0.3s;
+    }
+
+    .nav__links a:hover {
+      opacity: 1;
+    }
+
+    /* Burger */
+    .burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 110;
+      padding: 4px;
+    }
+    .burger span {
+      display: block;
+      width: 22px;
+      height: 1px;
+      background: var(--text);
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .burger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(4px, 4px);
+    }
+    .burger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .burger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(4px, -4px);
+    }
+
+    /* Mobile overlay */
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 105;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s;
+    }
+    .mobile-menu.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .mobile-menu a {
+      font-size: clamp(1.5rem, 5vw, 2.5rem);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-weight: 300;
+      color: var(--text);
+      opacity: 0.7;
+      transition: opacity 0.3s;
+    }
+    .mobile-menu a:hover {
+      opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+      .nav__links { display: none; }
+      .burger { display: flex; }
+      .nav { padding: 1.2rem 1.5rem; }
+    }
+
+    /* ───────────────────────── HERO ───────────────────────── */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero__bg {
+      position: absolute;
+      inset: 0;
+      background: url('../images/band_01.png') center center / cover no-repeat;
+    }
+
+    .hero__bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(5,5,5,0.55) 0%,
+        rgba(5,5,5,0.6) 60%,
+        rgba(5,5,5,0.85) 100%
+      );
+    }
+
+    .hero__logo {
+      position: relative;
+      z-index: 2;
+      width: 70vw;
+      max-width: 800px;
+    }
+
+    .hero__line {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--accent) 50%, transparent 100%);
+      z-index: 2;
+    }
+
+    .hero__tagline {
+      position: absolute;
+      bottom: -1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      font-size: clamp(0.7rem, 1.2vw, 1rem);
+      font-weight: 300;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--text);
+      opacity: 0.5;
+      white-space: nowrap;
+      text-align: center;
+      background: var(--bg);
+      padding: 0 1.5rem;
+    }
+
+    /* ───────────────────────── NEXT DATE ───────────────────────── */
+    .next-date {
+      position: relative;
+      padding: 20vh 2rem 10vh;
+      text-align: center;
+      background: var(--bg);
+    }
+
+    .next-date__label {
+      font-size: 0.65rem;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.4em;
+      color: var(--text);
+      opacity: 0.35;
+      margin-bottom: 2rem;
+    }
+
+    .next-date__date {
+      font-size: clamp(4rem, 15vw, 12rem);
+      font-weight: 700;
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+
+    .next-date__venue {
+      font-size: clamp(1.1rem, 2.5vw, 1.8rem);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 0.6rem;
+    }
+
+    .next-date__details {
+      font-size: clamp(0.75rem, 1.2vw, 0.9rem);
+      font-weight: 300;
+      color: var(--text);
+      opacity: 0.45;
+      margin-bottom: 3rem;
+    }
+
+    .next-date__cta {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 0.3rem;
+      transition: opacity 0.3s;
+      background: none;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+    }
+    .next-date__cta:hover {
+      opacity: 0.7;
+    }
+
+    .next-date__past {
+      margin-top: 4rem;
+      font-size: 0.7rem;
+      font-weight: 300;
+      color: var(--text);
+      opacity: 0.4;
+      text-decoration: line-through;
+      text-decoration-color: rgba(232, 228, 222, 0.25);
+    }
+
+    /* ───────────────────────── THE BAND ───────────────────────── */
+    .band {
+      position: relative;
+      width: 100%;
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .band__bg {
+      position: absolute;
+      inset: 0;
+      background: url('../images/band-03.jpg') center center / cover no-repeat;
+    }
+
+    .band__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        90deg,
+        rgba(5,5,5,0.92) 0%,
+        rgba(5,5,5,0.7) 35%,
+        rgba(5,5,5,0.15) 70%,
+        transparent 100%
+      );
+    }
+
+    .band__content {
+      position: relative;
+      z-index: 2;
+      max-width: 40%;
+      padding: 6rem 5vw;
+    }
+
+    .band__title {
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 1.8rem;
+    }
+
+    .band__text {
+      font-size: clamp(0.85rem, 1.1vw, 1rem);
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--text);
+      opacity: 0.8;
+      margin-bottom: 1.2rem;
+    }
+
+    @media (max-width: 768px) {
+      .band {
+        min-height: 60vh;
+        align-items: flex-end;
+      }
+      .band__overlay {
+        background: linear-gradient(
+          0deg,
+          rgba(5,5,5,0.95) 0%,
+          rgba(5,5,5,0.7) 50%,
+          rgba(5,5,5,0.2) 100%
+        );
+      }
+      .band__content {
+        max-width: 100%;
+        padding: 2rem 1.5rem 3rem;
+      }
+    }
+
+    /* ───────────────────────── LINE-UP ───────────────────────── */
+    .lineup {
+      background: var(--bg);
+      padding: 10vh 2rem 6vh;
+    }
+
+    .lineup__label {
+      font-size: 0.6rem;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.4em;
+      color: var(--text);
+      opacity: 0.3;
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    .lineup__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .member {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .member__photo {
+      width: 100%;
+      aspect-ratio: 2 / 3;
+      object-fit: cover;
+      filter: saturate(0.3) brightness(0.85);
+      transition: filter 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .member__tint {
+      position: absolute;
+      inset: 0;
+      background: rgba(74, 127, 181, 0.12);
+      transition: opacity 0.6s;
+      pointer-events: none;
+    }
+
+    .member:hover .member__photo {
+      filter: saturate(1) brightness(1);
+    }
+    .member:hover .member__tint {
+      opacity: 0;
+    }
+
+    .member__info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 1.5rem 1rem;
+      background: linear-gradient(0deg, rgba(5,5,5,0.8) 0%, transparent 100%);
+    }
+
+    .member__name {
+      font-size: clamp(0.65rem, 1vw, 0.85rem);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 0.25rem;
+    }
+
+    .member__role {
+      font-size: clamp(0.55rem, 0.8vw, 0.7rem);
+      font-weight: 300;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      opacity: 0.5;
+    }
+
+    .lineup__past {
+      text-align: center;
+      margin-top: 3rem;
+      font-size: 0.65rem;
+      font-weight: 300;
+      color: var(--text);
+      opacity: 0.3;
+      letter-spacing: 0.05em;
+    }
+
+    @media (max-width: 768px) {
+      .lineup__grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* ───────────────────────── LIVE / GALLERY ───────────────────────── */
+    .live {
+      background: var(--bg-light);
+      padding: 8vh 0 4vh;
+    }
+
+    .live__label {
+      font-size: 0.6rem;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.4em;
+      color: var(--text);
+      opacity: 0.25;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .live__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: auto auto;
+      gap: 3px;
+      max-width: 100%;
+    }
+
+    .live__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.35) brightness(0.9);
+      transition: filter 0.6s;
+      display: block;
+    }
+
+    .live__item {
+      overflow: hidden;
+    }
+
+    .live__item:hover .live__img {
+      filter: saturate(1) brightness(1);
+    }
+
+    /* Item 1: spans 2 cols, tall */
+    .live__item--1 {
+      grid-column: 1 / 3;
+      grid-row: 1 / 3;
+    }
+    .live__item--1 .live__img {
+      height: 100%;
+      min-height: 500px;
+    }
+
+    /* Item 2: top right */
+    .live__item--2 {
+      grid-column: 3 / 4;
+      grid-row: 1 / 2;
+    }
+    .live__item--2 .live__img {
+      height: 100%;
+      min-height: 248px;
+    }
+
+    /* Item 3: below item 2 */
+    .live__item--3 {
+      grid-column: 4 / 5;
+      grid-row: 1 / 2;
+    }
+    .live__item--3 .live__img {
+      height: 100%;
+      min-height: 248px;
+    }
+
+    /* Item 4: spans 2 cols, wide */
+    .live__item--4 {
+      grid-column: 3 / 5;
+      grid-row: 2 / 3;
+    }
+    .live__item--4 .live__img {
+      height: 100%;
+      min-height: 248px;
+    }
+
+    .live__link {
+      text-align: center;
+      margin-top: 3rem;
+      padding-bottom: 2rem;
+    }
+    .live__link a {
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      transition: opacity 0.3s;
+    }
+    .live__link a:hover {
+      opacity: 0.6;
+    }
+
+    @media (max-width: 768px) {
+      .live__grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto auto;
+      }
+      .live__item--1 {
+        grid-column: 1 / 3;
+        grid-row: 1 / 2;
+      }
+      .live__item--1 .live__img {
+        min-height: 280px;
+      }
+      .live__item--2 {
+        grid-column: 1 / 2;
+        grid-row: 2 / 3;
+      }
+      .live__item--2 .live__img {
+        min-height: 200px;
+      }
+      .live__item--3 {
+        grid-column: 2 / 3;
+        grid-row: 2 / 3;
+      }
+      .live__item--3 .live__img {
+        min-height: 200px;
+      }
+      .live__item--4 {
+        grid-column: 1 / 3;
+        grid-row: 3 / 4;
+      }
+      .live__item--4 .live__img {
+        min-height: 200px;
+      }
+    }
+
+    /* ───────────────────────── BOOKING ───────────────────────── */
+    .booking {
+      background: var(--bg);
+      padding: 15vh 2rem;
+    }
+
+    .booking__inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .booking__title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 3rem;
+    }
+
+    .booking__form {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .booking__field {
+      position: relative;
+    }
+
+    .booking__field input,
+    .booking__field textarea {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(232, 228, 222, 0.2);
+      color: var(--text);
+      font-size: 0.85rem;
+      font-weight: 300;
+      padding: 0.8rem 0;
+      outline: none;
+      transition: border-color 0.3s;
+      letter-spacing: 0.03em;
+    }
+
+    .booking__field input::placeholder,
+    .booking__field textarea::placeholder {
+      color: var(--text);
+      opacity: 0.3;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 0.7rem;
+    }
+
+    .booking__field input:focus,
+    .booking__field textarea:focus {
+      border-bottom-color: var(--accent);
+    }
+
+    .booking__field textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .booking__submit {
+      align-self: flex-start;
+      background: transparent;
+      border: 1px solid var(--text);
+      color: var(--text);
+      font-size: 0.7rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      padding: 0.9rem 2.5rem;
+      margin-top: 1rem;
+      transition: background 0.3s, color 0.3s, border-color 0.3s;
+    }
+    .booking__submit:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--bg);
+    }
+
+    .booking__sidebar {
+      padding-top: 5rem;
+    }
+
+    .booking__email {
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--accent);
+      display: inline-block;
+      margin-bottom: 2rem;
+      transition: opacity 0.3s;
+    }
+    .booking__email:hover {
+      opacity: 0.6;
+    }
+
+    .booking__social {
+      font-size: 0.7rem;
+      font-weight: 300;
+      color: var(--text);
+      opacity: 0.45;
+      line-height: 2.2;
+    }
+    .booking__social a {
+      transition: opacity 0.3s;
+    }
+    .booking__social a:hover {
+      opacity: 0.7;
+      color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+      .booking__inner {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+      .booking__sidebar {
+        padding-top: 0;
+      }
+    }
+
+    /* ───────────────────────── FOOTER ───────────────────────── */
+    .footer {
+      padding: 6rem 2rem 2rem;
+      text-align: center;
+      border-top: 1px solid rgba(74, 127, 181, 0.2);
+    }
+
+    .footer__text {
+      font-size: 0.6rem;
+      font-weight: 300;
+      color: var(--text);
+      opacity: 0.25;
+      letter-spacing: 0.08em;
+    }
+
+    .footer__text a {
+      transition: opacity 0.3s;
+    }
+    .footer__text a:hover {
+      opacity: 0.6;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ════════════════════════ NAVIGATION ════════════════════════ -->
+  <nav class="nav">
+    <a href="#hero" class="nav__logo">
+      <img src="../images/ph.jpg" alt="PlayHard">
+    </a>
+    <ul class="nav__links">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#live-section">Live</a></li>
+      <li><a href="#band">Band</a></li>
+      <li><a href="#lineup">Line-Up</a></li>
+      <li><a href="#booking">Booking</a></li>
+    </ul>
+    <button class="burger" aria-label="Menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile menu overlay -->
+  <div class="mobile-menu" aria-hidden="true">
+    <a href="#hero">Home</a>
+    <a href="#live-section">Live</a>
+    <a href="#band">Band</a>
+    <a href="#lineup">Line-Up</a>
+    <a href="#booking">Booking</a>
+  </div>
+
+  <!-- ════════════════════════ HERO ════════════════════════ -->
+  <section class="hero" id="hero">
+    <div class="hero__bg" aria-hidden="true"></div>
+    <img class="hero__logo" src="../images/ph.jpg" alt="PlayHard">
+    <div class="hero__line"></div>
+    <span class="hero__tagline">L'ESSENZA PRIMORDIALE DELL'HARD ROCK</span>
+  </section>
+
+  <!-- ════════════════════════ NEXT DATE ════════════════════════ -->
+  <section class="next-date" id="live-section">
+    <p class="next-date__label reveal">Prossimo Live</p>
+    <h2 class="next-date__date reveal">14.11.2026</h2>
+    <p class="next-date__venue reveal">The Old Jesse</p>
+    <p class="next-date__details reveal">Saronno &mdash; Sabato, 22:00</p>
+    <a href="#booking" class="next-date__cta reveal">Prenota</a>
+    <p class="next-date__past reveal">11.04.2026 &mdash; The Old Jesse, Saronno</p>
+  </section>
+
+  <!-- ════════════════════════ THE BAND ════════════════════════ -->
+  <section class="band" id="band">
+    <div class="band__bg" aria-hidden="true"></div>
+    <div class="band__overlay" aria-hidden="true"></div>
+    <div class="band__content">
+      <h2 class="band__title reveal">PlayHard</h2>
+      <p class="band__text reveal">Dal 1979 sulla scena. Metallica, Iron Maiden, Manowar, Kiss, Helloween &mdash; li abbiamo aperti, ci abbiamo suonato insieme. Oggi sul palco con la stessa ferocia di allora.</p>
+      <p class="band__text reveal">Oltre 2 ore e mezza di Rainbow, Dio, Black Sabbath, Whitesnake, Van Halen &mdash; e i nostri brani originali.</p>
+    </div>
+  </section>
+
+  <!-- ════════════════════════ LINE-UP ════════════════════════ -->
+  <section class="lineup" id="lineup">
+    <p class="lineup__label reveal">Line-Up</p>
+    <div class="lineup__grid">
+      <article class="member reveal">
+        <img class="member__photo" src="../images/maury_02.jpg" alt="Maurizio Roveron">
+        <div class="member__tint" aria-hidden="true"></div>
+        <div class="member__info">
+          <p class="member__name">Maurizio &ldquo;Maury&rdquo; Roveron</p>
+          <p class="member__role">Chitarra</p>
+        </div>
+      </article>
+      <article class="member reveal">
+        <img class="member__photo" src="../images/flax_01.jpg" alt="Flavio Ghisi">
+        <div class="member__tint" aria-hidden="true"></div>
+        <div class="member__info">
+          <p class="member__name">Flavio Ghisi</p>
+          <p class="member__role">Batteria</p>
+        </div>
+      </article>
+      <article class="member reveal">
+        <img class="member__photo" src="../images/renzo_01.jpg" alt="Renzo Sgroi">
+        <div class="member__tint" aria-hidden="true"></div>
+        <div class="member__info">
+          <p class="member__name">Renzo Sgroi</p>
+          <p class="member__role">Basso</p>
+        </div>
+      </article>
+      <article class="member reveal">
+        <img class="member__photo" src="../images/egi_-01.jpg" alt="Egidio Casati">
+        <div class="member__tint" aria-hidden="true"></div>
+        <div class="member__info">
+          <p class="member__name">Egidio Casati</p>
+          <p class="member__role">Voce</p>
+        </div>
+      </article>
+    </div>
+    <p class="lineup__past reveal">Past members: Lio Mascheroni (Batteria), Roberto Della Frera (Voce)</p>
+  </section>
+
+  <!-- ════════════════════════ LIVE / GALLERY ════════════════════════ -->
+  <section class="live">
+    <p class="live__label reveal">Live</p>
+    <div class="live__grid">
+      <div class="live__item live__item--1 reveal">
+        <img class="live__img" src="../images/maury_04.jpg" alt="PlayHard live">
+      </div>
+      <div class="live__item live__item--2 reveal">
+        <img class="live__img" src="../images/band-02.jpg" alt="PlayHard live">
+      </div>
+      <div class="live__item live__item--3 reveal">
+        <img class="live__img" src="../images/maury_01.jpg" alt="PlayHard live">
+      </div>
+      <div class="live__item live__item--4 reveal">
+        <img class="live__img" src="../images/flax_02.jpg" alt="PlayHard live">
+      </div>
+    </div>
+    <div class="live__link reveal">
+      <a href="https://www.youtube.com/@playhard5157" target="_blank" rel="noopener">Watch Live &#x2197;</a>
+    </div>
+  </section>
+
+  <!-- ════════════════════════ BOOKING ════════════════════════ -->
+  <section class="booking" id="booking">
+    <div class="booking__inner">
+      <div>
+        <h2 class="booking__title reveal">Booking</h2>
+        <form class="booking__form reveal" onsubmit="return false;">
+          <div class="booking__field">
+            <input type="text" placeholder="Nome" required>
+          </div>
+          <div class="booking__field">
+            <input type="email" placeholder="Email" required>
+          </div>
+          <div class="booking__field">
+            <textarea placeholder="Messaggio" rows="3"></textarea>
+          </div>
+          <button type="submit" class="booking__submit">Invia</button>
+        </form>
+      </div>
+      <aside class="booking__sidebar reveal">
+        <a class="booking__email" href="mailto:booking@playhardrock.it">booking@playhardrock.it</a>
+        <div class="booking__social">
+          <a href="https://www.facebook.com/PlayHardrockhardband" target="_blank" rel="noopener">Facebook</a>
+          &nbsp;&bull;&nbsp;
+          <a href="https://www.youtube.com/@playhard5157" target="_blank" rel="noopener">YouTube</a>
+          &nbsp;&bull;&nbsp;
+          <a href="https://gerlimusicmanagement.it/artista/playhard/" target="_blank" rel="noopener">Gerli Music</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ════════════════════════ FOOTER ════════════════════════ -->
+  <footer class="footer">
+    <p class="footer__text">&copy; 2026 PlayHard &nbsp;&mdash;&nbsp; <a href="cookie-policy.html">Cookie Policy</a></p>
+  </footer>
+
+  <!-- ════════════════════════ JAVASCRIPT ════════════════════════ -->
+  <script>
+    (function () {
+      // Burger menu toggle
+      const burger = document.querySelector('.burger');
+      const mobileMenu = document.querySelector('.mobile-menu');
+      const mobileLinks = mobileMenu.querySelectorAll('a');
+
+      burger.addEventListener('click', function () {
+        const isOpen = mobileMenu.classList.toggle('open');
+        burger.classList.toggle('active');
+        burger.setAttribute('aria-expanded', isOpen);
+        mobileMenu.setAttribute('aria-hidden', !isOpen);
+      });
+
+      mobileLinks.forEach(function (link) {
+        link.addEventListener('click', function () {
+          mobileMenu.classList.remove('open');
+          burger.classList.remove('active');
+          burger.setAttribute('aria-expanded', 'false');
+          mobileMenu.setAttribute('aria-hidden', 'true');
+        });
+      });
+
+      // Scroll-triggered reveal via IntersectionObserver
+      var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var reveals = document.querySelectorAll('.reveal');
+
+      if (prefersReduced) {
+        reveals.forEach(function (el) { el.classList.add('visible'); });
+        return;
+      }
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+
+      reveals.forEach(function (el) { observer.observe(el); });
+    })();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,1532 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PlayHard — Hard Rock Band | Concept B: Vinile '80</title>
+  <meta name="description" content="PlayHard — Hard Rock & Heavy Metal Band. Dal 1979 sulla scena.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;1,400&family=Monoton&family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ==============================
+       CSS CUSTOM PROPERTIES
+       ============================== */
+    :root {
+      --black: #0D0B08;
+      --aged-paper: #1C1915;
+      --chrome: #C0C0C0;
+      --gold: #CFB53B;
+      --gold-dim: #8a7828;
+      --rust: #CC5500;
+      --warm-white: #E8DCC8;
+      --sepia-light: #2A2520;
+      --groove-dark: #141210;
+      --font-display: 'Monoton', cursive;
+      --font-heading: 'Oswald', sans-serif;
+      --font-body: 'IBM Plex Serif', serif;
+    }
+
+    /* ==============================
+       RESET & BASE
+       ============================== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--black);
+      color: var(--warm-white);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    a {
+      color: var(--gold);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: var(--rust);
+    }
+
+    /* ==============================
+       NOISE / TEXTURE OVERLAY (global)
+       ============================== */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.035;
+      background-image:
+        repeating-radial-gradient(circle at 17% 32%, var(--warm-white) 0px, transparent 1px),
+        repeating-radial-gradient(circle at 83% 67%, var(--warm-white) 0px, transparent 1px),
+        repeating-radial-gradient(circle at 50% 50%, var(--warm-white) 0px, transparent 1px);
+      background-size: 3px 3px, 5px 5px, 4px 4px;
+    }
+
+    /* ==============================
+       NAVIGATION
+       ============================== */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(13, 11, 8, 0.75);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border-bottom: 1px solid rgba(207, 181, 59, 0.15);
+      transition: background 0.4s ease;
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.6rem 1.5rem;
+    }
+
+    .nav-logo img {
+      width: 45px;
+      height: 45px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 1px solid var(--gold-dim);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.8rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--font-heading);
+      font-weight: 500;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--rust);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Burger */
+    .burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 5px;
+    }
+
+    .burger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--gold);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    @media (max-width: 768px) {
+      .burger {
+        display: flex;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70vw;
+        max-width: 300px;
+        height: 100vh;
+        background: rgba(13, 11, 8, 0.97);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2.5rem;
+        transition: right 0.4s ease;
+        border-left: 1px solid var(--gold-dim);
+      }
+
+      .nav-links.open {
+        right: 0;
+      }
+
+      .nav-links a {
+        font-size: 1.1rem;
+      }
+
+      .burger.active span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+      }
+      .burger.active span:nth-child(2) {
+        opacity: 0;
+      }
+      .burger.active span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+      }
+    }
+
+    /* ==============================
+       1. HERO — "Album Cover"
+       ============================== */
+    .hero {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--black);
+      overflow: hidden;
+    }
+
+    /* Grain texture on hero */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 30% 20%, rgba(204, 85, 0, 0.06) 0%, transparent 60%),
+        radial-gradient(ellipse at 70% 80%, rgba(207, 181, 59, 0.04) 0%, transparent 50%),
+        repeating-radial-gradient(circle at 50% 50%, transparent 0px, transparent 1px, rgba(232, 220, 200, 0.02) 1px, transparent 2px);
+      background-size: 100% 100%, 100% 100%, 4px 4px;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Double-line LP inner sleeve border frame */
+    .hero-frame {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 2rem;
+      width: calc(100% - 10vw);
+      max-width: 900px;
+      min-height: 80vh;
+      border: 2px solid rgba(207, 181, 59, 0.3);
+      border-radius: 12px;
+      outline: 1px solid rgba(207, 181, 59, 0.12);
+      outline-offset: 6px;
+    }
+
+    .hero-logo {
+      width: 60vw;
+      max-width: 600px;
+      margin-bottom: 2.5rem;
+      filter:
+        drop-shadow(2px 2px 0px rgba(0,0,0,0.8))
+        drop-shadow(-1px -1px 0px rgba(207,181,59,0.15))
+        drop-shadow(0 0 30px rgba(204,85,0,0.08));
+    }
+
+    .hero-title {
+      font-family: var(--font-heading);
+      font-weight: 300;
+      font-size: clamp(0.7rem, 2vw, 1rem);
+      text-transform: uppercase;
+      letter-spacing: 1em;
+      color: var(--chrome);
+      text-align: center;
+      margin-bottom: 1rem;
+      background: linear-gradient(180deg, #e0e0e0, #909090);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-heading);
+      font-weight: 300;
+      font-size: clamp(0.6rem, 1.5vw, 0.8rem);
+      text-transform: uppercase;
+      letter-spacing: 0.5em;
+      text-align: center;
+      color: var(--gold-dim);
+    }
+
+    /* ==============================
+       2. SIDE A — "La Band" (vinyl label)
+       ============================== */
+    .side-a {
+      position: relative;
+      background: var(--aged-paper);
+      padding: 5rem 1.5rem;
+      overflow: hidden;
+    }
+
+    /* Worn texture */
+    .side-a::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 2px,
+          rgba(232, 220, 200, 0.008) 2px,
+          rgba(232, 220, 200, 0.008) 3px
+        );
+      pointer-events: none;
+    }
+
+    .side-label {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      max-width: 1000px;
+      margin: 0 auto 3.5rem;
+    }
+
+    .side-label-circle {
+      width: 80px;
+      height: 80px;
+      min-width: 80px;
+      border-radius: 50%;
+      border: 3px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background: radial-gradient(circle, var(--black) 30%, var(--groove-dark) 60%, var(--black) 100%);
+    }
+
+    .side-label-circle::before {
+      content: '';
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--black);
+      border: 2px solid var(--gold-dim);
+      position: absolute;
+    }
+
+    .side-label-text {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+    }
+
+    .side-label-text span {
+      display: block;
+      font-weight: 300;
+      font-size: 0.5em;
+      letter-spacing: 0.3em;
+      color: var(--chrome);
+      margin-top: 0.2em;
+    }
+
+    .side-a-content {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .side-a-text p {
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--warm-white);
+      opacity: 0.9;
+    }
+
+    .side-a-text p:first-child {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--chrome);
+    }
+
+    .side-a-image-wrap {
+      position: relative;
+      transform: rotate(1.5deg);
+    }
+
+    .side-a-image-wrap img {
+      width: 100%;
+      filter: sepia(0.35) contrast(1.1) brightness(0.95);
+      box-shadow:
+        4px 4px 0 var(--black),
+        8px 8px 0 rgba(28, 25, 21, 0.8),
+        0 0 40px rgba(0, 0, 0, 0.5);
+      clip-path: polygon(
+        0% 2%, 3% 0%, 8% 1%, 15% 0%, 22% 1.5%, 30% 0%, 38% 0.5%,
+        45% 0%, 52% 1%, 60% 0%, 68% 0.5%, 75% 0%, 82% 1%, 90% 0%,
+        95% 0.5%, 100% 0%, 100% 97%, 97% 100%, 92% 99%, 85% 100%,
+        78% 98.5%, 70% 100%, 62% 99.5%, 55% 100%, 48% 99%, 40% 100%,
+        32% 99.5%, 25% 100%, 18% 99%, 10% 100%, 5% 99.5%, 0% 100%
+      );
+    }
+
+    .side-a-image-wrap::after {
+      content: 'FANZINE — PLAYHARD — 1979';
+      position: absolute;
+      bottom: -1.5rem;
+      right: 1rem;
+      font-family: var(--font-heading);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--gold-dim);
+      text-transform: uppercase;
+      transform: rotate(1deg);
+    }
+
+    @media (max-width: 768px) {
+      .side-a-content {
+        grid-template-columns: 1fr;
+      }
+
+      .side-a-image-wrap {
+        order: -1;
+        max-width: 80%;
+        margin: 0 auto;
+        transform: rotate(-1deg);
+      }
+    }
+
+    /* ==============================
+       3. TRACKLIST — "Date Live"
+       ============================== */
+    .tracklist {
+      position: relative;
+      background: var(--black);
+      padding: 5rem 1.5rem;
+    }
+
+    /* LP back sleeve texture */
+    .tracklist::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(28, 25, 21, 0.5) 0%, transparent 30%, transparent 70%, rgba(28, 25, 21, 0.5) 100%),
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 1px,
+          rgba(232, 220, 200, 0.01) 1px,
+          rgba(232, 220, 200, 0.01) 2px
+        );
+      background-size: 100% 100%, 3px 3px;
+      pointer-events: none;
+    }
+
+    .tracklist-inner {
+      position: relative;
+      max-width: 700px;
+      margin: 0 auto;
+      z-index: 2;
+    }
+
+    .tracklist-header {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .tracklist-subheader {
+      font-family: var(--font-heading);
+      font-weight: 300;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.4em;
+      color: var(--chrome);
+      opacity: 0.6;
+      margin-bottom: 3rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(207, 181, 59, 0.2);
+    }
+
+    .track {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 0 1.5rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid rgba(207, 181, 59, 0.1);
+      align-items: start;
+    }
+
+    .track-number {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--rust);
+      line-height: 1.4;
+    }
+
+    .track-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .track-date {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--warm-white);
+    }
+
+    .track-venue {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--chrome);
+      opacity: 0.85;
+    }
+
+    .track-time {
+      font-family: var(--font-heading);
+      font-weight: 300;
+      font-size: 0.8rem;
+      color: var(--gold-dim);
+      letter-spacing: 0.1em;
+    }
+
+    .track-action {
+      align-self: center;
+    }
+
+    .btn-prenota {
+      display: inline-block;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--black);
+      background: var(--gold);
+      padding: 0.5rem 1.2rem;
+      border: none;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn-prenota:hover {
+      background: var(--rust);
+      color: var(--warm-white);
+      transform: scale(1.05);
+    }
+
+    /* Played / past show */
+    .track--past .track-date,
+    .track--past .track-venue {
+      opacity: 0.4;
+    }
+
+    .track--past .track-number {
+      opacity: 0.35;
+    }
+
+    .stamp-played {
+      display: inline-block;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--rust);
+      border: 2px solid var(--rust);
+      padding: 0.2rem 0.6rem;
+      transform: rotate(-6deg);
+      opacity: 0.7;
+    }
+
+    @media (max-width: 600px) {
+      .track {
+        grid-template-columns: auto 1fr;
+        gap: 0.3rem 1rem;
+      }
+
+      .track-action {
+        grid-column: 1 / -1;
+        margin-top: 0.8rem;
+      }
+    }
+
+    /* ==============================
+       4. SIDE B — "I Musicisti" (gatefold)
+       ============================== */
+    .side-b {
+      position: relative;
+      background: var(--sepia-light);
+      padding: 5rem 1.5rem;
+      overflow: hidden;
+    }
+
+    /* Cardboard gatefold texture */
+    .side-b::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(204, 85, 0, 0.04) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 30%, rgba(207, 181, 59, 0.03) 0%, transparent 40%),
+        repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 3px,
+          rgba(232, 220, 200, 0.012) 3px,
+          rgba(232, 220, 200, 0.012) 4px
+        );
+      pointer-events: none;
+    }
+
+    .side-b-inner {
+      position: relative;
+      max-width: 1100px;
+      margin: 0 auto;
+      z-index: 2;
+    }
+
+    .side-b-header {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .side-b-header-circle {
+      width: 60px;
+      height: 60px;
+      min-width: 60px;
+      border-radius: 50%;
+      border: 3px solid var(--rust);
+      background: radial-gradient(circle, var(--black) 25%, var(--groove-dark) 55%, var(--black) 100%);
+      position: relative;
+    }
+
+    .side-b-header-circle::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--black);
+      border: 2px solid var(--rust);
+    }
+
+    .side-b-title {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--gold);
+    }
+
+    .side-b-title span {
+      display: block;
+      font-weight: 300;
+      font-size: 0.5em;
+      letter-spacing: 0.3em;
+      color: var(--chrome);
+      margin-top: 0.2em;
+    }
+
+    /* Current lineup grid */
+    .lineup-current {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    .member-card {
+      text-align: center;
+    }
+
+    .member-photo {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      margin-bottom: 1rem;
+      background: var(--black);
+    }
+
+    .member-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      filter: sepia(0.3) contrast(1.1);
+      transition: filter 0.4s ease;
+    }
+
+    .member-card:hover .member-photo img {
+      filter: sepia(0.1) contrast(1.15) brightness(1.05);
+    }
+
+    .member-photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 1px solid rgba(207, 181, 59, 0.15);
+      pointer-events: none;
+    }
+
+    .member-name {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--warm-white);
+      margin-bottom: 0.2rem;
+    }
+
+    .member-role {
+      font-family: var(--font-heading);
+      font-weight: 300;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .member-cred {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-style: italic;
+      color: var(--chrome);
+      opacity: 0.7;
+      line-height: 1.4;
+    }
+
+    /* Past members */
+    .lineup-past-header {
+      font-family: var(--font-heading);
+      font-weight: 300;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.4em;
+      color: var(--gold-dim);
+      margin-bottom: 1.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(207, 181, 59, 0.15);
+    }
+
+    .lineup-past {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      max-width: 500px;
+    }
+
+    .member-card--past .member-photo {
+      aspect-ratio: 1 / 1;
+      max-width: 180px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .member-card--past .member-photo img {
+      filter: sepia(0.5) contrast(1) brightness(0.85);
+      opacity: 0.7;
+    }
+
+    .member-card--past .member-name {
+      font-size: 0.85rem;
+      color: var(--chrome);
+    }
+
+    .member-card--past .member-role {
+      font-size: 0.65rem;
+      color: var(--gold-dim);
+    }
+
+    .member-card--past .member-cred {
+      font-size: 0.75rem;
+    }
+
+    @media (max-width: 900px) {
+      .lineup-current {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .lineup-past {
+        grid-template-columns: 1fr;
+        max-width: 250px;
+      }
+    }
+
+    /* ==============================
+       5. LIVE SHOTS — Film Strip
+       ============================== */
+    .film-strip-section {
+      position: relative;
+      background: var(--black);
+      padding: 4rem 0 3rem;
+      overflow: hidden;
+    }
+
+    .film-strip-label {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      text-align: center;
+      margin-bottom: 2.5rem;
+      padding: 0 1.5rem;
+    }
+
+    .film-strip-wrapper {
+      position: relative;
+      background: #0a0908;
+      padding: 0;
+      margin: 0;
+    }
+
+    /* Sprocket holes — top */
+    .film-strip-wrapper::before {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 22px;
+      background:
+        repeating-linear-gradient(
+          90deg,
+          transparent 0px,
+          transparent 30px,
+          #1a1816 30px,
+          #1a1816 32px,
+          transparent 32px,
+          transparent 36px,
+          rgba(232, 220, 200, 0.04) 36px,
+          rgba(232, 220, 200, 0.04) 48px,
+          transparent 48px,
+          transparent 52px,
+          #1a1816 52px,
+          #1a1816 54px,
+          transparent 54px,
+          transparent 84px
+        );
+      border-top: 2px solid #1a1816;
+      border-bottom: 2px solid #1a1816;
+    }
+
+    /* Sprocket holes — bottom */
+    .film-strip-wrapper::after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 22px;
+      background:
+        repeating-linear-gradient(
+          90deg,
+          transparent 0px,
+          transparent 30px,
+          #1a1816 30px,
+          #1a1816 32px,
+          transparent 32px,
+          transparent 36px,
+          rgba(232, 220, 200, 0.04) 36px,
+          rgba(232, 220, 200, 0.04) 48px,
+          transparent 48px,
+          transparent 52px,
+          #1a1816 52px,
+          #1a1816 54px,
+          transparent 54px,
+          transparent 84px
+        );
+      border-top: 2px solid #1a1816;
+      border-bottom: 2px solid #1a1816;
+    }
+
+    .film-strip-scroll {
+      overflow-x: auto;
+      white-space: nowrap;
+      padding: 1rem 2rem;
+      scrollbar-width: thin;
+      scrollbar-color: var(--gold-dim) var(--black);
+    }
+
+    .film-strip-scroll::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .film-strip-scroll::-webkit-scrollbar-track {
+      background: var(--black);
+    }
+
+    .film-strip-scroll::-webkit-scrollbar-thumb {
+      background: var(--gold-dim);
+      border-radius: 3px;
+    }
+
+    .film-frame {
+      display: inline-block;
+      width: 320px;
+      height: 220px;
+      margin-right: 1rem;
+      overflow: hidden;
+      position: relative;
+      vertical-align: top;
+      border: 1px solid rgba(207, 181, 59, 0.1);
+    }
+
+    .film-frame:last-child {
+      margin-right: 0;
+    }
+
+    .film-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: sepia(0.2) contrast(1.1) saturate(0.9) brightness(0.95);
+    }
+
+    .film-frame::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(204, 85, 0, 0.05) 0%, transparent 40%, rgba(0, 0, 0, 0.2) 100%);
+      pointer-events: none;
+    }
+
+    /* Video CTA */
+    .video-cta {
+      text-align: center;
+      margin-top: 2.5rem;
+      padding: 0 1.5rem;
+    }
+
+    .video-cta a {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--chrome);
+      transition: color 0.3s ease;
+    }
+
+    .video-cta a:hover {
+      color: var(--gold);
+    }
+
+    .play-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border: 2px solid var(--chrome);
+      border-radius: 50%;
+      position: relative;
+      transition: border-color 0.3s ease;
+    }
+
+    .video-cta a:hover .play-icon {
+      border-color: var(--gold);
+    }
+
+    .play-icon::after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 8px 0 8px 14px;
+      border-color: transparent transparent transparent var(--chrome);
+      margin-left: 3px;
+      transition: border-color 0.3s ease;
+    }
+
+    .video-cta a:hover .play-icon::after {
+      border-color: transparent transparent transparent var(--gold);
+    }
+
+    @media (max-width: 600px) {
+      .film-frame {
+        width: 260px;
+        height: 180px;
+      }
+    }
+
+    /* ==============================
+       6. BOOKING — "Inner Sleeve Notes"
+       ============================== */
+    .booking {
+      position: relative;
+      background: var(--aged-paper);
+      padding: 5rem 1.5rem;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .booking::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(207, 181, 59, 0.04) 0%, transparent 50%),
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 20px,
+          rgba(232, 220, 200, 0.01) 20px,
+          rgba(232, 220, 200, 0.01) 21px
+        );
+      pointer-events: none;
+    }
+
+    .booking-inner {
+      position: relative;
+      max-width: 600px;
+      margin: 0 auto;
+      z-index: 2;
+    }
+
+    .booking-title {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .booking-subtitle {
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: 0.9rem;
+      color: var(--chrome);
+      opacity: 0.5;
+      margin-bottom: 3rem;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      text-align: left;
+      margin-bottom: 3rem;
+    }
+
+    .form-field {
+      position: relative;
+    }
+
+    .form-field label {
+      font-family: var(--font-heading);
+      font-weight: 300;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: var(--gold-dim);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-field input,
+    .form-field textarea {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--gold-dim);
+      padding: 0.6rem 0;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--warm-white);
+      outline: none;
+      transition: border-color 0.3s ease;
+      resize: none;
+    }
+
+    .form-field input:focus,
+    .form-field textarea:focus {
+      border-bottom-color: var(--gold);
+    }
+
+    .form-field textarea {
+      min-height: 100px;
+    }
+
+    .btn-submit {
+      display: inline-block;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--black);
+      background: linear-gradient(135deg, var(--gold), #E8C84A);
+      border: none;
+      padding: 0.9rem 2.5rem;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+      align-self: center;
+    }
+
+    .btn-submit:hover {
+      background: linear-gradient(135deg, var(--rust), #E06600);
+      color: var(--warm-white);
+      transform: scale(1.03);
+    }
+
+    .booking-email {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--chrome);
+      margin-bottom: 2rem;
+    }
+
+    .booking-email a {
+      color: var(--gold);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s ease;
+    }
+
+    .booking-email a:hover {
+      border-bottom-color: var(--gold);
+    }
+
+    .booking-socials {
+      font-family: var(--font-heading);
+      font-weight: 300;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--chrome);
+      opacity: 0.7;
+    }
+
+    .booking-socials a {
+      color: var(--chrome);
+      transition: color 0.3s ease;
+    }
+
+    .booking-socials a:hover {
+      color: var(--gold);
+    }
+
+    .booking-socials .sep {
+      margin: 0 0.8rem;
+      color: var(--gold-dim);
+      opacity: 0.5;
+    }
+
+    /* ==============================
+       7. FOOTER — Record Label
+       ============================== */
+    .footer {
+      position: relative;
+      background: var(--black);
+      padding: 3rem 1.5rem;
+      text-align: center;
+      border-top: 1px solid rgba(207, 181, 59, 0.1);
+    }
+
+    .footer-vinyl-ring {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid rgba(207, 181, 59, 0.25);
+      margin: 0 auto 1.5rem;
+      position: relative;
+      background: radial-gradient(
+        circle,
+        var(--black) 25%,
+        rgba(207, 181, 59, 0.05) 26%,
+        rgba(207, 181, 59, 0.03) 40%,
+        var(--black) 41%,
+        rgba(207, 181, 59, 0.02) 55%,
+        var(--black) 56%,
+        rgba(207, 181, 59, 0.02) 70%,
+        var(--black) 100%
+      );
+    }
+
+    .footer-vinyl-ring::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--gold-dim);
+    }
+
+    .footer-copy {
+      font-family: var(--font-heading);
+      font-weight: 300;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--chrome);
+      opacity: 0.5;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-legal a {
+      font-family: var(--font-heading);
+      font-weight: 300;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--gold-dim);
+      opacity: 0.5;
+    }
+
+    .footer-legal a:hover {
+      opacity: 1;
+    }
+
+    /* ==============================
+       REDUCED MOTION
+       ============================== */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================
+       NAVIGATION
+       ======================== -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">
+        <img src="../images/ph.jpg" alt="PlayHard Logo" width="45" height="45">
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#side-a">La Band</a></li>
+        <li><a href="#tracklist">Date</a></li>
+        <li><a href="#side-b">Musicisti</a></li>
+        <li><a href="#booking">Booking</a></li>
+      </ul>
+      <button class="burger" id="burger" aria-label="Menu di navigazione" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ========================
+       1. HERO — Album Cover
+       ======================== -->
+  <section class="hero" id="hero">
+    <div class="hero-frame">
+      <img src="../images/ph.jpg" alt="PlayHard" class="hero-logo">
+      <p class="hero-title">The Rock Hard Band</p>
+      <p class="hero-subtitle">Dal 1979 sulla scena</p>
+    </div>
+  </section>
+
+  <!-- ========================
+       2. SIDE A — La Band
+       ======================== -->
+  <section class="side-a" id="side-a">
+    <div class="side-label">
+      <div class="side-label-circle" aria-hidden="true"></div>
+      <div class="side-label-text">
+        Lato A
+        <span>La Band</span>
+      </div>
+    </div>
+    <div class="side-a-content">
+      <div class="side-a-text">
+        <p>Musicisti che hanno condiviso il palco con Metallica, Manowar, Iron Maiden, Kiss, Helloween, Pino Scotto.</p>
+        <p>Dal 1979 sulla scena. Oggi sul palco con la stessa ferocia.</p>
+        <p>Oltre due ore e mezza di classici del rock e dell'heavy metal: Rainbow, Dio, Black Sabbath, Judas Priest, Saxon, Accept, Whitesnake, Van Halen, Billy Idol, Bryan Adams — e i brani originali della band.</p>
+      </div>
+      <div class="side-a-image-wrap">
+        <img src="../images/band-03.jpg" alt="PlayHard live" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================
+       3. TRACKLIST — Date Live
+       ======================== -->
+  <section class="tracklist" id="tracklist">
+    <div class="tracklist-inner">
+      <h2 class="tracklist-header">Date Live</h2>
+      <p class="tracklist-subheader">Prossimi appuntamenti e concerti passati</p>
+
+      <!-- Upcoming -->
+      <div class="track">
+        <span class="track-number">A1.</span>
+        <div class="track-info">
+          <span class="track-date">14 Novembre 2026</span>
+          <span class="track-venue">The Old Jesse — Via Maestri del Lavoro 27, Saronno</span>
+          <span class="track-time">Sabato, ore 22:00</span>
+        </div>
+        <div class="track-action">
+          <a href="#booking" class="btn-prenota">Prenota</a>
+        </div>
+      </div>
+
+      <!-- Past -->
+      <div class="track track--past">
+        <span class="track-number">A2.</span>
+        <div class="track-info">
+          <span class="track-date">11 Aprile 2026</span>
+          <span class="track-venue">The Old Jesse — Saronno</span>
+        </div>
+        <div class="track-action">
+          <span class="stamp-played">Played</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================
+       4. SIDE B — I Musicisti
+       ======================== -->
+  <section class="side-b" id="side-b">
+    <div class="side-b-inner">
+      <div class="side-b-header">
+        <div class="side-b-header-circle" aria-hidden="true"></div>
+        <div class="side-b-title">
+          Lato B — I Musicisti
+          <span>Formazione attuale</span>
+        </div>
+      </div>
+
+      <!-- Current Lineup -->
+      <div class="lineup-current">
+        <div class="member-card">
+          <div class="member-photo">
+            <img src="../images/maury_02.jpg" alt="Maurizio Roveron" loading="lazy">
+          </div>
+          <p class="member-name">Maurizio "Maury" Roveron</p>
+          <p class="member-role">Chitarra / Fondatore</p>
+          <p class="member-cred">Chitarrista di Pino Scotto. Sulla scena dal 1979.</p>
+        </div>
+
+        <div class="member-card">
+          <div class="member-photo">
+            <img src="../images/flax_01.jpg" alt="Flavio Ghisi" loading="lazy">
+          </div>
+          <p class="member-name">Flavio Ghisi</p>
+          <p class="member-role">Batteria</p>
+          <p class="member-cred">Bloody Skizz. Tra i primi 45 giri metal in Italia.</p>
+        </div>
+
+        <div class="member-card">
+          <div class="member-photo">
+            <img src="../images/renzo_01.jpg" alt="Renzo Sgroi" loading="lazy">
+          </div>
+          <p class="member-name">Renzo Sgroi</p>
+          <p class="member-role">Basso</p>
+          <p class="member-cred">R.A.F. Opening per Metallica, Manowar, Iron Maiden.</p>
+        </div>
+
+        <div class="member-card">
+          <div class="member-photo">
+            <img src="../images/egi_-01.jpg" alt="Egidio Casati" loading="lazy">
+          </div>
+          <p class="member-name">Egidio Casati</p>
+          <p class="member-role">Voce</p>
+          <p class="member-cred">Boarders. Due album su etichette USA, tour negli States.</p>
+        </div>
+      </div>
+
+      <!-- Past Members -->
+      <p class="lineup-past-header">Ex Membri</p>
+      <div class="lineup-past">
+        <div class="member-card member-card--past">
+          <div class="member-photo">
+            <img src="../images/lio_01.jpg" alt="Lio Mascheroni" loading="lazy">
+          </div>
+          <p class="member-name">Lio Mascheroni</p>
+          <p class="member-role">Batteria / Fondatore</p>
+          <p class="member-cred">Vanadium. Co-fondatore PlayHard.</p>
+        </div>
+
+        <div class="member-card member-card--past">
+          <div class="member-photo">
+            <img src="../images/rob_01.jpg" alt="Roberto Della Frera" loading="lazy">
+          </div>
+          <p class="member-name">Roberto "Rob" Della Frera</p>
+          <p class="member-role">Voce</p>
+          <p class="member-cred">Love Machine, Raising Fear.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================
+       5. LIVE SHOTS — Film Strip
+       ======================== -->
+  <section class="film-strip-section">
+    <h2 class="film-strip-label">Live Shots</h2>
+    <div class="film-strip-wrapper">
+      <div class="film-strip-scroll">
+        <div class="film-frame">
+          <img src="../images/band-02.jpg" alt="PlayHard live" loading="lazy">
+        </div>
+        <div class="film-frame">
+          <img src="../images/maury_01.jpg" alt="Maury live" loading="lazy">
+        </div>
+        <div class="film-frame">
+          <img src="../images/maury_04.jpg" alt="Maury on stage" loading="lazy">
+        </div>
+        <div class="film-frame">
+          <img src="../images/flax_02.jpg" alt="Flavio live" loading="lazy">
+        </div>
+        <div class="film-frame">
+          <img src="../images/band_01.png" alt="PlayHard band" loading="lazy">
+        </div>
+      </div>
+    </div>
+    <div class="video-cta">
+      <a href="https://www.youtube.com/@playhard5157" target="_blank" rel="noopener noreferrer">
+        <span class="play-icon" aria-hidden="true"></span>
+        Guarda i Video
+      </a>
+    </div>
+  </section>
+
+  <!-- ========================
+       6. BOOKING — Inner Sleeve Notes
+       ======================== -->
+  <section class="booking" id="booking">
+    <div class="booking-inner">
+      <h2 class="booking-title">Booking &amp; Contatti</h2>
+      <p class="booking-subtitle">Per prenotazioni e informazioni</p>
+
+      <form class="contact-form" action="#" method="post">
+        <div class="form-field">
+          <label for="nome">Nome</label>
+          <input type="text" id="nome" name="nome" autocomplete="name" required>
+        </div>
+        <div class="form-field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" autocomplete="email" required>
+        </div>
+        <div class="form-field">
+          <label for="messaggio">Messaggio</label>
+          <textarea id="messaggio" name="messaggio" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Invia</button>
+      </form>
+
+      <p class="booking-email"><a href="mailto:booking@playhardrock.it">booking@playhardrock.it</a></p>
+
+      <p class="booking-socials">
+        <a href="https://www.facebook.com/PlayHardrockhardband" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <span class="sep" aria-hidden="true">&bull;</span>
+        <a href="https://www.youtube.com/@playhard5157" target="_blank" rel="noopener noreferrer">YouTube</a>
+        <span class="sep" aria-hidden="true">&bull;</span>
+        <a href="https://gerlimusicmanagement.it/artista/playhard/" target="_blank" rel="noopener noreferrer">Gerli Music Management</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ========================
+       7. FOOTER — Record Label
+       ======================== -->
+  <footer class="footer">
+    <div class="footer-vinyl-ring" aria-hidden="true"></div>
+    <p class="footer-copy">&copy; 2026 PlayHard — All rights reserved</p>
+    <p class="footer-legal"><a href="cookie-policy.html">Cookie Policy</a></p>
+  </footer>
+
+  <!-- ========================
+       MINIMAL JS: Burger Toggle
+       ======================== -->
+  <script>
+    (function () {
+      var burger = document.getElementById('burger');
+      var navLinks = document.getElementById('navLinks');
+      if (!burger || !navLinks) return;
+
+      burger.addEventListener('click', function () {
+        var isOpen = navLinks.classList.toggle('open');
+        burger.classList.toggle('active');
+        burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+
+      navLinks.addEventListener('click', function (e) {
+        if (e.target.tagName === 'A') {
+          navLinks.classList.remove('open');
+          burger.classList.remove('active');
+          burger.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
