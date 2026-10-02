@@ -5,16 +5,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="PlayHard - Hard Rock/Metal Band con membri storici di R.A.F., Vanadium, Bloody Skizz e Boarders. Eventi live unici e intensi.">
     <title>PLAYHARD | Hard Rock/Metal Band</title>
+    <link rel="canonical" href="https://www.playhardrock.it/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="PLAYHARD | Hard Rock/Metal Band">
+    <meta property="og:description" content="L'essenza primordiale dell'hard rock incontra il presente. Musicisti storici della scena rock italiana, live show intensi e indimenticabili.">
+    <meta property="og:image" content="https://www.playhardrock.it/images/ph.jpg">
+    <meta property="og:url" content="https://www.playhardrock.it/">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="it_IT">
+
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="apple-touch-icon" href="images/favicon-180.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Saira+Condensed:wght@300;400;600;700;900&family=Teko:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Playfair+Display:wght@700&family=Source+Serif+4:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+
+    <!-- JSON-LD: MusicGroup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "MusicGroup",
+        "name": "PlayHard",
+        "url": "https://www.playhardrock.it",
+        "image": "https://www.playhardrock.it/images/ph.jpg",
+        "genre": ["Hard Rock", "Heavy Metal"],
+        "description": "Hard Rock/Metal Band con membri storici di R.A.F., Vanadium, Bloody Skizz e Boarders.",
+        "sameAs": [
+            "https://www.facebook.com/PlayHardrockhardband",
+            "https://www.youtube.com/@playhard5157"
+        ],
+        "member": [
+            {"@type": "Person", "name": "Maurizio Roveron", "roleName": "Chitarra"},
+            {"@type": "Person", "name": "Flavio Ghisi", "roleName": "Batteria"},
+            {"@type": "Person", "name": "Renzo Sgroi", "roleName": "Basso"},
+            {"@type": "Person", "name": "Egidio Casati", "roleName": "Voce"}
+        ],
+        "event": {
+            "@type": "MusicEvent",
+            "name": "PlayHard Live at The Old Jesse",
+            "startDate": "2026-11-14T22:00:00+01:00",
+            "location": {
+                "@type": "Place",
+                "name": "The Old Jesse",
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "Via Maestri del Lavoro 27",
+                    "addressLocality": "Saronno",
+                    "addressCountry": "IT",
+                    "postalCode": "21047"
+                }
+            },
+            "performer": {"@type": "MusicGroup", "name": "PlayHard"}
+        }
+    }
+    </script>
 </head>
 <body>
+    <a href="#main" class="skip-link">Salta al contenuto</a>
+
     <!-- Navigation -->
-    <nav id="navbar">
+    <nav id="navbar" aria-label="Navigazione principale">
         <div class="container">
             <a href="#home" class="logo">
                 <img src="images/ph.jpg" alt="PlayHard - The Rock Hard Band">
@@ -28,27 +80,25 @@
                 <li><a href="#technical">Technical</a></li>
                 <li><a href="#contact">Contatti</a></li>
             </ul>
-            <div class="burger">
+            <button class="burger" aria-label="Apri menu di navigazione" aria-expanded="false" aria-controls="nav-links">
                 <div class="line1"></div>
                 <div class="line2"></div>
                 <div class="line3"></div>
-            </div>
+            </button>
         </div>
     </nav>
 
+    <main id="main">
+
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <canvas id="soundWaves"></canvas>
-        <div class="hero-overlay"></div>
         <div class="hero-content">
             <div class="hero-logo">
                 <img src="images/ph.jpg" alt="PlayHard - The Rock Hard Band">
             </div>
-            <br>
-            <p class="tagline">l'essenza primordiale dell'hard rock incontra il presente</p>
-            <br>
+            <p class="tagline">L'essenza primordiale dell'hard rock incontra il presente</p>
             <div class="hero-cta">
-                <a href="#contact" class="btn btn-primary">Richiedi un evento</a>
+                <a href="#contact" class="btn btn-primary">Booking</a>
                 <a href="#band" class="btn btn-secondary">Scopri la band</a>
             </div>
         </div>
@@ -66,25 +116,26 @@
             <div class="about-content">
                 <div class="about-text">
                     <p class="lead">
-                        I <strong>PlayHard</strong> offrono un’esperienza live travolgente, capace di riportare sul palco l’autenticità 
-                        e l’intensità dell’hard rock e del metal più classici. Un’energia vera, alimentata da musicisti che questo 
+                        I <strong>PlayHard</strong> offrono un'esperienza live travolgente, capace di riportare sul palco l'autenticita
+                        e l'intensita dell'hard rock e del metal piu classici. Un'energia vera, alimentata da musicisti che questo
                         genere lo hanno vissuto in prima persona, fin dai suoi esordi.
                     </p>
                     <p>
-                        Fondata da musicisti con una storia che attraversa decenni di palchi nazionali e internazionali, i 
-                        PlayHard sono una presenza autorevole della scena rock nazionale. I suoi membri hanno condiviso il 
+                        Fondata da musicisti con una storia che attraversa decenni di palchi nazionali e internazionali, i
+                        PlayHard sono una presenza autorevole della scena rock nazionale. I suoi membri hanno condiviso il
                         palco e collaborato con leggende come <strong>Metallica</strong>, <strong>Manowar</strong>, <strong>Iron Maiden</strong>,
-                        <strong>Kiss</strong>, <strong>Helloween</strong>, <strong>Paul Di'Anno</strong>, <strong>Jeff Waters (Annihilator)</strong>. <strong>Pino Scotto</strong> 
-                        e molti altri. Un percorso che si traduce in uno show potente, solido e coinvolgente, capace di unire esperienza, carisma e pura energia rock.
+                        <strong>Kiss</strong>, <strong>Helloween</strong>, <strong>Paul Di'Anno</strong>, <strong>Jeff Waters (Annihilator)</strong>,
+                        <strong>Pino Scotto</strong> e molti altri. Un percorso che si traduce in uno show potente, solido e coinvolgente,
+                        capace di unire esperienza, carisma e pura energia rock.
                     </p>
                     <p>
-                        Ogni live è un <strong>evento unico</strong>. Non un semplice concerto, ma una serata in cui la storia del rock prende forma attraverso una setlist che attraversa 
-                        epoche e sonorità: dai brani simbolo di Rainbow, Dio, Saxon, Whitesnake, Black Sabbath, Accept, fino a brani più recenti, senza dimenticare le composizioni 
-                        originali della band, che si mescolano con personalità e coerenza al repertorio storico.
+                        Ogni live e un <strong>evento unico</strong>. Non un semplice concerto, ma una serata in cui la storia del rock prende forma attraverso una setlist che attraversa
+                        epoche e sonorita: dai brani simbolo di Rainbow, Dio, Saxon, Whitesnake, Black Sabbath, Accept, fino a brani piu recenti, senza dimenticare le composizioni
+                        originali della band, che si mescolano con personalita e coerenza al repertorio storico.
                     </p>
                     <blockquote class="quote">
-                        "Poche date, scelte con cura. E quando i <strong>PlayHard</strong> salgono sul palco, l'essenza originaria dell'hard rock e del metal più classico arriva dritta 
-                        al pubblico, con un’intensità che non si dimentica."
+                        "Poche date, scelte con cura. E quando i <strong>PlayHard</strong> salgono sul palco, l'essenza originaria dell'hard rock e del metal piu classico arriva dritta
+                        al pubblico, con un'intensita che non si dimentica."
                     </blockquote>
                 </div>
             </div>
@@ -95,7 +146,6 @@
     <section id="members" class="members">
         <div class="container">
             <h2 class="section-title">I Musicisti</h2>
-            <br>
 
             <!-- Current Line-up -->
             <div class="lineup-section">
@@ -103,10 +153,10 @@
                 <div class="members-grid">
                     <div class="member-card">
                         <div class="member-photo">
-                            <img src="images/maury_02.jpg" alt="Maurizio Maury Roveron">
+                            <img src="images/maury_02.jpg" alt="Maurizio Maury Roveron" loading="lazy" width="400" height="400">
                         </div>
-                        <h3>Maurizio "Maury" Roveron</h3>
-                        <p class="member-role">Chitarra • Fondatore</p>
+                        <h4>Maurizio "Maury" Roveron</h4>
+                        <p class="member-role">Chitarra &bull; Fondatore</p>
                         <div class="member-bio">
                             <p>Chitarrista di <strong>Pino Scotto</strong> e fondatore dei PlayHard insieme a Lio Mascheroni.
                             Dal 1979 nella scena rock, con esperienze che vanno da San Remo 1984 alla compilation
@@ -117,23 +167,23 @@
 
                     <div class="member-card">
                         <div class="member-photo">
-                            <img src="images/flax_01.jpg" alt="Flavio Ghisi">
+                            <img src="images/flax_01.jpg" alt="Flavio Ghisi" loading="lazy" width="400" height="400">
                         </div>
-                        <h3>Flavio Ghisi</h3>
+                        <h4>Flavio Ghisi</h4>
                         <p class="member-role">Batteria</p>
                         <div class="member-bio">
                             <p>Batterista dei <strong>Bloody Skizz</strong>, una delle prime band a registrare
                             un 45 giri metal in Italia. Attivo dal 1981, ha militato in numerose formazioni della scena
-                            underground metal. Dal 2015 è il batterista ufficiale dei PlayHard, portando
+                            underground metal. Dal 2015 e il batterista ufficiale dei PlayHard, portando
                             potenza e precisione dietro le pelli.</p>
                         </div>
                     </div>
 
                     <div class="member-card">
                         <div class="member-photo">
-                            <img src="images/renzo_01.jpg" alt="Renzo Sgroi">
+                            <img src="images/renzo_01.jpg" alt="Renzo Sgroi" loading="lazy" width="400" height="400">
                         </div>
-                        <h3>Renzo Sgroi</h3>
+                        <h4>Renzo Sgroi</h4>
                         <p class="member-role">Basso</p>
                         <div class="member-bio">
                             <p>Ex bassista dei <strong>R.A.F. (Royal Air Force)</strong>, una delle prime band
@@ -145,9 +195,9 @@
 
                     <div class="member-card">
                         <div class="member-photo">
-                            <img src="images/egi_-01.jpg" alt="Egidio Casati">
+                            <img src="images/egi_-01.jpg" alt="Egidio Casati" loading="lazy" width="400" height="400">
                         </div>
-                        <h3>Egidio Casati</h3>
+                        <h4>Egidio Casati</h4>
                         <p class="member-role">Voce</p>
                         <div class="member-bio">
                             <p>Precedentemente cantante e chitarrista dei <strong>Boarders</strong>, con tour negli Stati Uniti e due album
@@ -165,10 +215,10 @@
                 <div class="members-grid past-members-grid">
                     <div class="member-card past-member">
                         <div class="member-photo">
-                            <img src="images/lio_01.jpg" alt="Lio Mascheroni">
+                            <img src="images/lio_01.jpg" alt="Lio Mascheroni" loading="lazy" width="400" height="400">
                         </div>
-                        <h3>Lio Mascheroni</h3>
-                        <p class="member-role">Batteria • Fondatore</p>
+                        <h4>Lio Mascheroni</h4>
+                        <p class="member-role">Batteria &bull; Fondatore</p>
                         <div class="member-bio">
                             <p>Batterista dei <strong>Vanadium</strong> e co-fondatore dei PlayHard insieme a Maurizio Roveron.
                             Pilastro della scena metal, Lio ha contribuito alla nascita e alla crescita della band,
@@ -178,12 +228,12 @@
 
                     <div class="member-card past-member">
                         <div class="member-photo">
-                            <img src="images/rob_01.jpg" alt="Roberto Rob Della Frera">
+                            <img src="images/rob_01.jpg" alt="Roberto Rob Della Frera" loading="lazy" width="400" height="400">
                         </div>
-                        <h3>Roberto "Rob" Della Frera</h3>
+                        <h4>Roberto "Rob" Della Frera</h4>
                         <p class="member-role">Voce</p>
                         <div class="member-bio">
-                            <p>Lead Singer dei milanesi love Machine, attivo dal 1985 con diverse band underground. Album di debutto "Dressed to Kill" con Deadline nel 2000.
+                            <p>Lead Singer dei milanesi Love Machine, attivo dal 1985 con diverse band underground. Album di debutto "Dressed to Kill" con Deadline nel 2000.
                             Ha suonato con <strong>Raising Fear</strong> (2002-2013), apparendo in festival importanti tra cui
                             Tradate Iron Fest con RJ Dio e Saxon.</p>
                         </div>
@@ -197,25 +247,25 @@
     <section id="setlist" class="setlist">
         <div class="container">
             <h2 class="section-title">Setlist</h2>
-            <p class="section-subtitle">Una selezione dei grandi classici che hanno fatto la storia dell'hardrock</p>
+            <p class="section-subtitle">Una selezione dei grandi classici che hanno fatto la storia dell'hard rock</p>
 
             <div class="setlist-content">
                 <div class="about-content">
                 <div class="about-text">
                     <p class="lead">
-                        Uno show che attraversa oltre due ore e mezza di puro rock: dall’heavy metal dei giganti come 
-                        Rainbow, Dio, Black Sabbath, Judas Priest, Saxon e Accept, ai grandi inni del rock di Whitesnake, 
-                        Van Halen, Billy Idol e Bryan Adams, fino alle composizioni originali dei PlayHard, capaci di reggere 
-                        il confronto con i classici. Energia, potenza e spettacolo senza pause: un viaggio live nel cuore del rock
+                        Uno show che attraversa oltre due ore e mezza di puro rock: dall'heavy metal dei giganti come
+                        Rainbow, Dio, Black Sabbath, Judas Priest, Saxon e Accept, ai grandi inni del rock di Whitesnake,
+                        Van Halen, Billy Idol e Bryan Adams, fino alle composizioni originali dei PlayHard, capaci di reggere
+                        il confronto con i classici. Energia, potenza e spettacolo senza pause: un viaggio live nel cuore del rock.
                    </p>
                 </div>
             </div>
-                
+
             </div>
 
             <div class="setlist-note">
                 <p><strong>Nota:</strong> La setlist viene adattata in base alla venue e alle esigenze dell'evento.
-                Ogni live è un'esperienza unica e irripetibile.</p>
+                Ogni live e un'esperienza unica e irripetibile.</p>
             </div>
         </div>
     </section>
@@ -231,7 +281,7 @@
                 <h3 class="shows-title">Prossime Date</h3>
                 <div class="show-card">
                     <div class="show-logo">
-                        <img src="images/old_jesse_logo.jpg" alt="The Old Jesse">
+                        <img src="images/old_jesse_logo.jpg" alt="The Old Jesse" loading="lazy" width="100" height="100">
                     </div>
                     <div class="show-info">
                         <div class="show-date">
@@ -257,7 +307,7 @@
                 <h3 class="shows-title">Date Passate</h3>
                 <div class="show-card past-show">
                     <div class="show-logo">
-                        <img src="images/old_jesse_logo.jpg" alt="The Old Jesse">
+                        <img src="images/old_jesse_logo.jpg" alt="The Old Jesse" loading="lazy" width="100" height="100">
                     </div>
                     <div class="show-info">
                         <div class="show-date">
@@ -280,19 +330,19 @@
 
             <div class="gallery-grid">
                 <div class="gallery-item">
-                    <img src="images/band-02.jpg" alt="PlayHard con il pubblico">
+                    <img src="images/band-02.jpg" alt="PlayHard con il pubblico" loading="lazy" width="800" height="600">
                     <div class="gallery-overlay">
                         <p>L'energia del pubblico</p>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="images/band-03.jpg" alt="PlayHard live - batteria">
+                    <img src="images/band-03.jpg" alt="PlayHard live - batteria" loading="lazy" width="800" height="600">
                     <div class="gallery-overlay">
                         <p>Potenza dal vivo</p>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="images/maury_01.jpg" alt="Maury Roveron live">
+                    <img src="images/maury_01.jpg" alt="Maury Roveron live" loading="lazy" width="800" height="600">
                     <div class="gallery-overlay">
                         <p>Rock hard attitude</p>
                     </div>
@@ -309,7 +359,7 @@
 
             <div class="technical-grid">
                 <div class="tech-card">
-                    <h3>🎸 Line-up</h3>
+                    <h3>Line-up</h3>
                     <ul>
                         <li>Voce</li>
                         <li>Chitarra</li>
@@ -319,7 +369,7 @@
                 </div>
 
                 <div class="tech-card">
-                    <h3>🎤 Audio</h3>
+                    <h3>Audio</h3>
                     <ul>
                         <li>Mixer minimo: 16 canali</li>
                         <li>Monitor: 4 mix separati</li>
@@ -330,7 +380,7 @@
                 </div>
 
                 <div class="tech-card">
-                    <h3>🎭 Palco</h3>
+                    <h3>Palco</h3>
                     <ul>
                         <li><strong>Indoor:</strong> Minimo 6x4 metri</li>
                         <li><strong>Outdoor:</strong> Minimo 8x6 metri</li>
@@ -341,7 +391,7 @@
                 </div>
 
                 <div class="tech-card">
-                    <h3>💡 Luci</h3>
+                    <h3>Luci</h3>
                     <ul>
                         <li>Impianto luci base</li>
                         <li>Front light e back light</li>
@@ -351,17 +401,17 @@
                 </div>
 
                 <div class="tech-card">
-                    <h3>⏱️ Timing</h3>
+                    <h3>Timing</h3>
                     <ul>
                         <li>Soundcheck: 1 ora</li>
                         <li>Durata set: 90 minuti minimo</li>
-                        <li>Possibilità di 2 set separati</li>
+                        <li>Possibilita di 2 set separati</li>
                         <li>Setup/Strike: 30 minuti ciascuno</li>
                     </ul>
                 </div>
 
                 <div class="tech-card">
-                    <h3>📋 Hospitality</h3>
+                    <h3>Hospitality</h3>
                     <ul>
                         <li>Camerino con servizi</li>
                         <li>Acqua e bevande</li>
@@ -388,12 +438,12 @@
                     <form id="contactForm" class="contact-form">
                         <div class="form-group">
                             <label for="name">Nome *</label>
-                            <input type="text" id="name" name="name" required>
+                            <input type="text" id="name" name="name" required aria-required="true">
                         </div>
 
                         <div class="form-group">
                             <label for="email">Email *</label>
-                            <input type="email" id="email" name="email" required>
+                            <input type="email" id="email" name="email" required aria-required="true">
                         </div>
 
                         <div class="form-group">
@@ -413,7 +463,7 @@
 
                         <div class="form-group">
                             <label for="message">Messaggio *</label>
-                            <textarea id="message" name="message" rows="5" required></textarea>
+                            <textarea id="message" name="message" rows="5" required aria-required="true"></textarea>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Invia Richiesta</button>
@@ -425,7 +475,7 @@
                 <div class="contact-info">
                     <div class="info-box">
                         <h3>Booking & Info</h3>
-                        <p>📧 <a href="mailto:booking@playhardrock.it">booking@playhardrock.it</a></p>
+                        <p><a href="mailto:booking@playhardrock.it">booking@playhardrock.it</a></p>
                     </div>
 
                     <div class="info-box">
@@ -438,17 +488,17 @@
                         <h3>Seguici</h3>
                         <div class="social-icons">
                             <a href="https://www.facebook.com/PlayHardrockhardband" target="_blank" rel="noopener" class="social-icon facebook" title="Facebook">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                                     <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                                 </svg>
                             </a>
                             <a href="https://www.youtube.com/@playhard5157" target="_blank" rel="noopener" class="social-icon youtube" title="YouTube">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                                     <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
                                 </svg>
                             </a>
                             <a href="https://gerlimusicmanagement.it/artista/playhard/" target="_blank" rel="noopener" class="social-icon website" title="Gerli Music">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                                     <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm9.5 12c0 1.657-.425 3.214-1.17 4.571l-3.239-8.876c.605-1.231.807-2.217.807-3.094 0-.319-.02-.615-.059-.891A9.503 9.503 0 0 1 21.5 12zM12 2.5c.996 0 1.96.155 2.867.44-.015.024-.029.049-.044.074-.485.789-.866 1.726-.866 3.011 0 1.401.807 2.596 1.613 4.001.605 1.145 1.316 2.619 1.316 4.748 0 1.469-.565 3.174-1.316 4.947l-1.724-5.131c-.605-1.512-.807-2.723-.807-3.795 0-1.401.202-2.403.404-3.174-.634-.967-1.397-1.774-2.249-2.401A9.455 9.455 0 0 1 12 2.5zM2.5 12c0-2.181.734-4.189 1.968-5.794l5.405 14.805A9.472 9.472 0 0 1 2.5 12zm13.348 8.479l4.183-12.069c.807-2.024.807-3.644.807-4.798 0-.494-.032-.95-.09-1.379A9.455 9.455 0 0 1 21.5 12c0 3.865-2.309 7.188-5.652 8.679z"/>
                                 </svg>
                             </a>
@@ -458,6 +508,8 @@
             </div>
         </div>
     </section>
+
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
@@ -486,23 +538,12 @@
     <script src="script.js"></script>
 
     <!-- Cookie Banner -->
-    <div id="cookieBanner" class="cookie-banner">
+    <div id="cookieBanner" class="cookie-banner" role="dialog" aria-label="Informativa cookie">
         <div class="cookie-content">
             <p>Questo sito utilizza cookie tecnici e di terze parti per migliorare l'esperienza di navigazione.
             <a href="cookie-policy.html">Leggi la Cookie Policy</a></p>
             <button id="acceptCookies" class="btn btn-primary">Accetta</button>
         </div>
     </div>
-
-    <script>
-        // Cookie Banner
-        if (!localStorage.getItem('cookiesAccepted')) {
-            document.getElementById('cookieBanner').style.display = 'block';
-        }
-        document.getElementById('acceptCookies').addEventListener('click', function() {
-            localStorage.setItem('cookiesAccepted', 'true');
-            document.getElementById('cookieBanner').style.display = 'none';
-        });
-    </script>
 </body>
 </html>

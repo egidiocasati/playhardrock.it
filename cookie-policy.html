@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Cookie Policy - PlayHard Band">
     <title>Cookie Policy | PLAYHARD</title>
+    <link rel="canonical" href="https://www.playhardrock.it/cookie-policy.html">
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="apple-touch-icon" href="images/favicon-180.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Saira+Condensed:wght@300;400;600;700;900&family=Teko:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Playfair+Display:wght@700&family=Source+Serif+4:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
         .policy-page {
@@ -23,20 +24,27 @@
             padding: 0 20px;
         }
         .policy-content h1 {
-            font-family: 'Oswald', sans-serif;
+            font-family: var(--font-display);
             font-size: 3rem;
             margin-bottom: 2rem;
-            color: var(--light-text);
+            color: var(--text-cream);
         }
         .policy-content h2 {
-            font-family: 'Oswald', sans-serif;
+            font-family: var(--font-display);
             font-size: 1.8rem;
             margin-top: 2.5rem;
             margin-bottom: 1rem;
-            color: var(--primary-color);
+            color: var(--accent-gold);
+        }
+        .policy-content h3 {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-cream);
         }
         .policy-content p, .policy-content li {
-            color: var(--gray-text);
+            color: var(--text-muted);
             line-height: 1.8;
             margin-bottom: 1rem;
         }
@@ -45,23 +53,31 @@
             margin-bottom: 1.5rem;
         }
         .policy-content a {
-            color: var(--primary-color);
+            color: var(--accent-gold);
+            transition: color 0.3s ease;
+        }
+        .policy-content a:hover {
+            color: var(--accent-red);
         }
         .back-link {
             display: inline-block;
             margin-top: 2rem;
-            color: var(--accent-metal);
+            color: var(--accent-gold);
             text-decoration: none;
+            font-family: var(--font-nav);
             font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
         }
         .back-link:hover {
-            color: var(--primary-color);
+            color: var(--accent-red);
         }
     </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav id="navbar" class="scrolled">
+    <nav id="navbar" class="scrolled" aria-label="Navigazione principale">
         <div class="container">
             <a href="index.html" class="logo">
                 <img src="images/ph.jpg" alt="PlayHard - The Rock Hard Band">
@@ -75,11 +91,11 @@
                 <li><a href="index.html#technical">Technical</a></li>
                 <li><a href="index.html#contact">Contatti</a></li>
             </ul>
-            <div class="burger">
+            <button class="burger" aria-label="Apri menu di navigazione" aria-expanded="false">
                 <div class="line1"></div>
                 <div class="line2"></div>
                 <div class="line3"></div>
-            </div>
+            </button>
         </div>
     </nav>
 
@@ -118,7 +134,7 @@
 
             <h2>Come gestire i cookie</h2>
             <p>Puoi controllare e/o eliminare i cookie come preferisci. Puoi eliminare tutti i cookie
-            già presenti sul tuo dispositivo e impostare la maggior parte dei browser in modo da
+            gia presenti sul tuo dispositivo e impostare la maggior parte dei browser in modo da
             bloccarne l'installazione.</p>
             <p>Per maggiori informazioni su come gestire i cookie nei vari browser:</p>
             <ul>
@@ -136,7 +152,7 @@
             <p>Per qualsiasi domanda riguardante questa Cookie Policy, puoi contattarci all'indirizzo:
             <a href="mailto:booking@playhardrock.it">booking@playhardrock.it</a></p>
 
-            <a href="index.html" class="back-link">← Torna alla Home</a>
+            <a href="index.html" class="back-link">&larr; Torna alla Home</a>
         </div>
     </div>
 
@@ -164,8 +180,9 @@
         const burger = document.querySelector('.burger');
         const navLinks = document.querySelector('.nav-links');
         burger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
+            const isOpen = navLinks.classList.toggle('active');
             burger.classList.toggle('active');
+            burger.setAttribute('aria-expanded', isOpen);
         });
     </script>
 </body>
