@@ -896,6 +896,33 @@ section:nth-child(even) {
     color: var(--primary-color);
 }
 
+/* Past Shows */
+.past-shows {
+    margin: 4rem 0 3rem;
+    padding-top: 3rem;
+    border-top: 1px solid rgba(196, 30, 58, 0.2);
+}
+
+.show-card.past-show {
+    opacity: 0.7;
+    border-color: rgba(192, 192, 192, 0.2);
+}
+
+.show-card.past-show:hover {
+    opacity: 0.9;
+    border-color: rgba(192, 192, 192, 0.4);
+    box-shadow: 0 10px 30px rgba(192, 192, 192, 0.15);
+}
+
+.show-card.past-show .show-date {
+    background: rgba(192, 192, 192, 0.3);
+}
+
+.show-card.past-show .show-logo {
+    border-color: var(--accent-metal);
+    filter: grayscale(30%);
+}
+
 @media screen and (max-width: 600px) {
     .show-card {
         flex-direction: column;
