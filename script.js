@@ -235,31 +235,31 @@
 
 
   // ═══════════════════════════════════════════════════
-  // YOUTUBE FACADE (click to load)
+  // YOUTUBE FACADE (click to open channel / embed video)
   // ═══════════════════════════════════════════════════
 
   var facade = document.querySelector('.video__facade');
   if (facade) {
-    function loadVideo() {
+    function activateVideo() {
       var videoId = facade.getAttribute('data-video-id');
-      if (!videoId || videoId === 'YOUR_VIDEO_ID') {
+      if (videoId) {
+        var iframe = document.createElement('iframe');
+        iframe.src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0';
+        iframe.setAttribute('allow', 'autoplay; encrypted-media');
+        iframe.setAttribute('allowfullscreen', '');
+        iframe.setAttribute('title', 'PlayHard video');
+        facade.innerHTML = '';
+        facade.appendChild(iframe);
+        facade.style.cursor = 'default';
+        facade.removeEventListener('click', activateVideo);
+      } else {
         window.open('https://www.youtube.com/@playhard5157', '_blank');
-        return;
       }
-      var iframe = document.createElement('iframe');
-      iframe.src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0';
-      iframe.setAttribute('allow', 'autoplay; encrypted-media');
-      iframe.setAttribute('allowfullscreen', '');
-      iframe.setAttribute('title', 'PlayHard video');
-      facade.innerHTML = '';
-      facade.appendChild(iframe);
-      facade.style.cursor = 'default';
-      facade.removeEventListener('click', loadVideo);
     }
 
-    facade.addEventListener('click', loadVideo);
+    facade.addEventListener('click', activateVideo);
     facade.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); loadVideo(); }
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activateVideo(); }
     });
   }
 

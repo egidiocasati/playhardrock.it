@@ -15,6 +15,17 @@ else
     echo "✅ Repository Git già presente"
 fi
 
+# Run build step (generate static HTML and JSON-LD from shows.json)
+echo ""
+echo "Generazione contenuti statici da data/shows.json..."
+if command -v node &> /dev/null; then
+    node build.js
+    echo "Build completato"
+else
+    echo "Node.js non trovato. Skipping build step."
+    echo "Installa Node.js per generare automaticamente i dati dei concerti."
+fi
+
 # Add all files
 echo ""
 echo "Aggiunta dei file..."
