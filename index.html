@@ -15,34 +15,110 @@
   <meta property="og:type" content="website">
   <meta property="og:locale" content="it_IT">
 
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PLAYHARD — Hard Rock dal 1979">
+  <meta name="twitter:description" content="Dal 1979 sulla scena. Metallica, Iron Maiden, Manowar, Kiss — li abbiamo aperti, ci abbiamo suonato insieme.">
+  <meta name="twitter:image" content="https://www.playhardrock.it/images/ph.jpg">
+
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 
-  <!-- JSON-LD -->
+  <!-- JSON-LD: MusicGroup -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "MusicGroup",
     "name": "PlayHard",
     "url": "https://www.playhardrock.it",
+    "logo": "https://www.playhardrock.it/images/ph.jpg",
     "image": "https://www.playhardrock.it/images/ph.jpg",
     "genre": ["Hard Rock", "Heavy Metal"],
-    "description": "Hard Rock/Metal Band — musicisti storici di R.A.F., Vanadium, Bloody Skizz e Boarders.",
+    "description": "Band hard rock/heavy metal italiana fondata nel 1979. Musicisti storici di R.A.F., Vanadium, Bloody Skizz e Boarders. Hanno aperto per Metallica, Iron Maiden, Manowar, Kiss e Helloween.",
     "foundingDate": "1979",
+    "email": "booking@playhardrock.it",
     "sameAs": [
       "https://www.facebook.com/PlayHardrockhardband",
-      "https://www.youtube.com/@playhard5157"
+      "https://www.youtube.com/@playhard5157",
+      "https://gerlimusicmanagement.it/artista/playhard/"
     ],
     "member": [
-      {"@type": "Person", "name": "Maurizio Roveron", "roleName": "Chitarra"},
-      {"@type": "Person", "name": "Flavio Ghisi", "roleName": "Batteria"},
-      {"@type": "Person", "name": "Renzo Sgroi", "roleName": "Basso"},
-      {"@type": "Person", "name": "Egidio Casati", "roleName": "Voce"}
-    ]
+      {"@type": "Person", "name": "Maurizio Roveron", "roleName": "Chitarra", "description": "Chitarrista di Pino Scotto e fondatore dei PlayHard. Dal 1979 nella scena rock."},
+      {"@type": "Person", "name": "Flavio Ghisi", "roleName": "Batteria", "description": "Batterista dei Bloody Skizz, attivo dal 1981. Dal 2015 batterista ufficiale dei PlayHard."},
+      {"@type": "Person", "name": "Renzo Sgroi", "roleName": "Basso", "description": "Ex bassista dei R.A.F. (Royal Air Force). Ha aperto concerti di Metallica, Manowar e Monsters of Rock. Dal 2021 nei PlayHard."},
+      {"@type": "Person", "name": "Egidio Casati", "roleName": "Voce", "description": "Ex cantante e chitarrista dei Boarders, con tour negli Stati Uniti e due album su etichette USA."}
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "booking",
+      "email": "booking@playhardrock.it"
+    }
   }
+  </script>
+
+  <!-- JSON-LD: MusicEvent (fallback statico per crawler) -->
+  <script type="application/ld+json" id="events-jsonld">
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "MusicEvent",
+      "name": "PlayHard Live @ The Old Jesse",
+      "startDate": "2026-11-14T22:00:00+01:00",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "location": {
+        "@type": "Place",
+        "name": "The Old Jesse",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Via Maestri del Lavoro 27",
+          "addressLocality": "Saronno",
+          "addressCountry": "IT"
+        }
+      },
+      "performer": {
+        "@type": "MusicGroup",
+        "name": "PlayHard",
+        "url": "https://www.playhardrock.it"
+      },
+      "organizer": {
+        "@type": "Organization",
+        "name": "The Old Jesse",
+        "url": "https://www.facebook.com/THEOLDJESSE"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "MusicEvent",
+      "name": "PlayHard Live @ The Old Jesse",
+      "startDate": "2026-04-11T22:00:00+01:00",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "location": {
+        "@type": "Place",
+        "name": "The Old Jesse",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Via Maestri del Lavoro 27",
+          "addressLocality": "Saronno",
+          "addressCountry": "IT"
+        }
+      },
+      "performer": {
+        "@type": "MusicGroup",
+        "name": "PlayHard",
+        "url": "https://www.playhardrock.it"
+      },
+      "organizer": {
+        "@type": "Organization",
+        "name": "The Old Jesse",
+        "url": "https://www.facebook.com/THEOLDJESSE"
+      }
+    }
+  ]
   </script>
 </head>
 <body>
@@ -91,6 +167,42 @@
     <div id="shows-container">
       <p class="shows__empty">Caricamento date...</p>
     </div>
+    <noscript>
+      <div class="shows-noscript">
+        <p class="shows__label">Prossime Date</p>
+        <div class="show-card">
+          <div class="show-card__info">
+            <div class="show-card__date">
+              <span class="show-card__day">14</span>
+              <span class="show-card__month">NOV</span>
+              <span class="show-card__year">2026</span>
+            </div>
+            <div class="show-card__details">
+              <h3 class="show-card__venue"><a href="https://www.facebook.com/THEOLDJESSE" target="_blank" rel="noopener">The Old Jesse</a></h3>
+              <p class="show-card__time">Sabato, ore 22:00</p>
+              <p class="show-card__address"><a href="https://www.google.com/maps/search/?api=1&query=Via+Maestri+del+Lavoro+27,+Saronno,+Italy,+21047" target="_blank" rel="noopener">Via Maestri del Lavoro 27, Saronno</a></p>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:5rem;">
+          <p class="shows__past-label">Date Passate</p>
+          <div class="show-card show-card--past">
+            <div class="show-card__info">
+              <div class="show-card__date">
+                <span class="show-card__day">11</span>
+                <span class="show-card__month">APR</span>
+                <span class="show-card__year">2026</span>
+              </div>
+              <div class="show-card__details">
+                <h3 class="show-card__venue"><a href="https://www.facebook.com/THEOLDJESSE" target="_blank" rel="noopener">The Old Jesse</a></h3>
+                <p class="show-card__time">Sabato, ore 22:00</p>
+                <p class="show-card__address"><a href="https://www.google.com/maps/search/?api=1&query=Via+Maestri+del+Lavoro+27,+Saronno,+Italy,+21047" target="_blank" rel="noopener">Via Maestri del Lavoro 27, Saronno</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </noscript>
   </section>
 
   <!-- ═══════ BAND ═══════ -->
@@ -112,7 +224,7 @@
 
       <article class="member reveal">
         <div class="member__photo-wrap">
-          <img class="member__photo" src="images/maury_02.jpg" alt="Maurizio Roveron" loading="lazy" width="1001" height="1500">
+          <img class="member__photo" src="images/maury_02.jpg" alt="Maurizio 'Maury' Roveron — chitarrista e fondatore dei PlayHard" loading="lazy" width="1001" height="1500">
         </div>
         <div class="member__info">
           <h3 class="member__name">Maurizio &ldquo;Maury&rdquo; Roveron</h3>
@@ -123,7 +235,7 @@
 
       <article class="member reveal">
         <div class="member__photo-wrap">
-          <img class="member__photo" src="images/flax_01.jpg" alt="Flavio Ghisi" loading="lazy" width="1080" height="1478">
+          <img class="member__photo" src="images/flax_01.jpg" alt="Flavio Ghisi — batterista dei PlayHard, ex Bloody Skizz" loading="lazy" width="1080" height="1478">
         </div>
         <div class="member__info">
           <h3 class="member__name">Flavio Ghisi</h3>
@@ -134,7 +246,7 @@
 
       <article class="member reveal">
         <div class="member__photo-wrap">
-          <img class="member__photo" src="images/renzo_01.jpg" alt="Renzo Sgroi" loading="lazy" width="1080" height="863">
+          <img class="member__photo" src="images/renzo_01.jpg" alt="Renzo Sgroi — bassista dei PlayHard, ex R.A.F." loading="lazy" width="1080" height="863">
         </div>
         <div class="member__info">
           <h3 class="member__name">Renzo Sgroi</h3>
@@ -145,7 +257,7 @@
 
       <article class="member reveal">
         <div class="member__photo-wrap">
-          <img class="member__photo" src="images/egi_-01.jpg" alt="Egidio Casati" loading="lazy" width="469" height="608">
+          <img class="member__photo" src="images/egi_-01.jpg" alt="Egidio Casati — voce dei PlayHard, ex Boarders" loading="lazy" width="469" height="608">
         </div>
         <div class="member__info">
           <h3 class="member__name">Egidio Casati</h3>
@@ -163,7 +275,7 @@
       <div class="lineup__past-grid">
         <article class="past-member reveal">
           <div class="past-member__photo-wrap">
-            <img class="past-member__photo" src="images/lio_01.jpg" alt="Lio Mascheroni" loading="lazy" width="780" height="585">
+            <img class="past-member__photo" src="images/lio_01.jpg" alt="Lio Mascheroni — batterista e co-fondatore dei PlayHard, ex Vanadium" loading="lazy" width="780" height="585">
           </div>
           <div class="past-member__info">
             <h3 class="past-member__name">Lio Mascheroni</h3>
@@ -173,7 +285,7 @@
         </article>
         <article class="past-member reveal">
           <div class="past-member__photo-wrap">
-            <img class="past-member__photo" src="images/rob_01.jpg" alt="Roberto Della Frera" loading="lazy" width="1001" height="1500">
+            <img class="past-member__photo" src="images/rob_01.jpg" alt="Roberto 'Rob' Della Frera — ex cantante dei PlayHard, Love Machine e Raising Fear" loading="lazy" width="1001" height="1500">
           </div>
           <div class="past-member__info">
             <h3 class="past-member__name">Roberto &ldquo;Rob&rdquo; Della Frera</h3>
@@ -190,16 +302,16 @@
     <p class="live__label reveal">Live</p>
     <div class="live__grid">
       <div class="live__item live__item--1 reveal">
-        <img class="live__img" src="images/maury_04.jpg" alt="PlayHard live — Maury Roveron" loading="lazy" width="864" height="1296">
+        <img class="live__img" src="images/maury_04.jpg" alt="Maury Roveron sul palco con la chitarra durante un concerto PlayHard" loading="lazy" width="864" height="1296">
       </div>
       <div class="live__item live__item--2 reveal">
-        <img class="live__img" src="images/band-02.jpg" alt="PlayHard live — band e pubblico" loading="lazy" width="1080" height="720">
+        <img class="live__img" src="images/band-02.jpg" alt="PlayHard dal vivo — la band sul palco con il pubblico" loading="lazy" width="1080" height="720">
       </div>
       <div class="live__item live__item--3 reveal">
-        <img class="live__img" src="images/maury_01.jpg" alt="PlayHard live — chitarra" loading="lazy" width="687" height="960">
+        <img class="live__img" src="images/maury_01.jpg" alt="Primo piano di Maury Roveron alla chitarra elettrica durante un live dei PlayHard" loading="lazy" width="687" height="960">
       </div>
       <div class="live__item live__item--4 reveal">
-        <img class="live__img" src="images/flax_02.jpg" alt="PlayHard live — batteria" loading="lazy" width="720" height="960">
+        <img class="live__img" src="images/flax_02.jpg" alt="Flavio Ghisi alla batteria durante un concerto PlayHard" loading="lazy" width="720" height="960">
       </div>
     </div>
   </section>
@@ -207,7 +319,7 @@
   <!-- ═══════ VIDEO ═══════ -->
   <section class="video" id="video">
     <div class="video__facade" data-video-id="YOUR_VIDEO_ID" role="button" tabindex="0" aria-label="Riproduci video YouTube">
-      <img src="images/band_01.png" alt="PlayHard live performance" width="1692" height="1270">
+      <img src="images/band_01.png" alt="PlayHard live performance — anteprima video YouTube della band dal vivo" width="1692" height="1270">
       <div class="video__play" aria-hidden="true"></div>
     </div>
     <div class="video__link">

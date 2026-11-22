@@ -184,9 +184,50 @@
     });
   }
 
+  function updateEventsJsonLd(shows) {
+    var events = shows.map(function (s) {
+      return {
+        '@context': 'https://schema.org',
+        '@type': 'MusicEvent',
+        'name': 'PlayHard Live @ ' + s.venue,
+        'startDate': s.date + 'T' + s.time + ':00+01:00',
+        'eventStatus': 'https://schema.org/EventScheduled',
+        'eventAttendanceMode': 'https://schema.org/OfflineEventAttendanceMode',
+        'location': {
+          '@type': 'Place',
+          'name': s.venue,
+          'address': {
+            '@type': 'PostalAddress',
+            'streetAddress': s.address || '',
+            'addressLocality': s.city,
+            'addressCountry': 'IT'
+          }
+        },
+        'performer': {
+          '@type': 'MusicGroup',
+          'name': 'PlayHard',
+          'url': 'https://www.playhardrock.it'
+        },
+        'organizer': s.venueUrl ? {
+          '@type': 'Organization',
+          'name': s.venue,
+          'url': s.venueUrl
+        } : undefined
+      };
+    });
+
+    var el = document.getElementById('events-jsonld');
+    if (el) {
+      el.textContent = JSON.stringify(events);
+    }
+  }
+
   fetch('data/shows.json')
     .then(function (r) { return r.json(); })
-    .then(renderShows)
+    .then(function (shows) {
+      renderShows(shows);
+      updateEventsJsonLd(shows);
+    })
     .catch(function () {
       document.getElementById('shows-container').innerHTML =
         '<p class="shows__label">Live</p><p class="shows__empty">Nuove date in arrivo</p>';
